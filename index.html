@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- permit-perf-optimized-2026-08-26 -->
 <title>KORAIL 밀폐 SAFE PASS | 밀폐공간 작업 전 안전확인·허가</title>
 <meta property="og:title" content="KORAIL 밀폐 SAFE PASS">
 <meta property="og:description" content="밀폐공간 작업 전 측정·환기·보호구·허가 확인 후 진입">
@@ -252,6 +253,15 @@ body{padding-bottom:88px}
  .permit-wizard-controls button:disabled{opacity:.42;filter:grayscale(.4)}
 }
 
+
+@media(max-width:760px){
+  #view-permit .worker-mini-pad canvas{display:none!important}
+  #view-permit .worker-mini-tools{display:none!important}
+  #view-permit .worker-mini-pad{border:0!important;background:transparent!important;min-height:48px}
+  #view-permit .worker-sign-row{grid-template-columns:minmax(0,1fr) minmax(132px,.72fr) auto!important;align-items:center}
+  #view-permit .worker-mini-pad .signature-open-btn{display:block;width:100%;min-height:46px;border:1px solid #7b8da0;border-radius:9px;background:#eef4f8;color:#173f5b;font-weight:900;font-size:12px;padding:8px}
+  #view-permit .worker-mini-pad .signature-open-btn:disabled{opacity:.8;background:#e8f6ed;color:#17683a;border-color:#79b38f}
+}
 </style>
 </head>
 <body class="field-active">
@@ -1249,7 +1259,7 @@ function renderWorkerSigns(type){
  if(!arr.length)arr.push(blankWorkerSign());
  list.innerHTML=arr.map((r,i)=>{const linked=type==="exit"&&r.source==="entry";return`<div class="worker-sign-row ${linked?"from-entry":""}" data-worker-row="${type}-${i}"><div class="worker-sign-name"><label>${workerLabel(type)} 작업자 ${i+1} · 성명 ${linked?'<span class="worker-link-badge">입장기록 연동</span>':""}</label><input type="text" inputmode="text" autocomplete="name" data-worker-name="${type}" data-worker-index="${i}" value="${esc(r.name||"")}" placeholder="성명 입력" ${linked?"readonly":""}></div><div class="worker-mini-pad ${linked?"readonly":""}"><canvas id="${type}WorkerCanvas${i}" width="520" height="150"></canvas><div class="worker-mini-tools ${linked?"linked":""}"><span id="${type}WorkerSignStatus${i}">${linked?"✓ 입장 서명 사용":workerSigned(r)?"✓ 서명 완료":"손가락으로 서명"}</span>${linked?"":`<button type="button" data-clear-worker-sign="${type}" data-worker-index="${i}">지우기</button>`}</div></div><button type="button" class="worker-remove" data-remove-worker="${type}" data-worker-index="${i}">삭제</button></div>`}).join("");
  if(count){const signed=arr.filter(workerSigned).length;const linked=type==="exit"?arr.filter(r=>r.source==="entry").length:0;count.textContent=type==="exit"?`${arr.filter(r=>String(r.name||"").trim()).length}명 · 입장연동 ${linked}명`:`${arr.length}명 · 서명 ${signed}명`}
- $$(`[data-worker-name="${type}"]`).forEach(inp=>inp.addEventListener("input",()=>{const i=Number(inp.dataset.workerIndex);workerSigns[type][i].name=inp.value;syncWorkerSignsHidden();if(type==="entry")renderEntryCopyPicker()}));
+ $$(`[data-worker-name="${type}"]`).forEach(inp=>{inp.addEventListener("input",()=>{const i=Number(inp.dataset.workerIndex);if(workerSigns[type]?.[i])workerSigns[type][i].name=inp.value});inp.addEventListener("change",()=>{syncWorkerSignsHidden();if(type==="entry")renderEntryCopyPicker();if(typeof window.schedulePermitStatus==="function")window.schedulePermitStatus(40)})});
  $$(`[data-clear-worker-sign="${type}"]`).forEach(btn=>btn.onclick=()=>{const i=Number(btn.dataset.workerIndex);workerSigns[type][i].paths=[];workerSigns[type][i].signedAt="";workerSigns[type][i].source="";syncWorkerSignsHidden();renderWorkerSigns(type);if(type==="entry")renderEntryCopyPicker()});
  $$(`[data-remove-worker="${type}"]`).forEach(btn=>btn.onclick=()=>{const i=Number(btn.dataset.workerIndex);if(workerSigns[type].length<=1){workerSigns[type]=[blankWorkerSign()]}else workerSigns[type].splice(i,1);syncWorkerSignsHidden();renderWorkerSigns(type);if(type==="entry")renderEntryCopyPicker()});
  arr.forEach((_,i)=>setupWorkerSignPad(type,i));syncWorkerSignsHidden();renderEntryCopyPicker()
@@ -1476,7 +1486,7 @@ function hideBootSplash(){const b=document.getElementById("bootSplash");if(!b)re
 /* 첫 화면은 내장 데이터로 즉시 그린 뒤, 저장 데이터/부가기능을 뒤에서 복원합니다. */
 refreshCritical();
 requestAnimationFrame(()=>{hideBootSplash();setTimeout(()=>{loadSafetyLocal();loadLocal();refreshCritical();refreshDeferred()},40)});
-if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate:new Date().toISOString().slice(0,10)});importPermitFromHash()},140)}else{setTimeout(()=>fillPermit({permitDate:new Date().toISOString().slice(0,10)}),450)};
+if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate:new Date().toISOString().slice(0,10)});importPermitFromHash()},140)};
 </script>
 
 <script>
@@ -1487,7 +1497,7 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
  const STEP_NAMES=['기본정보','가스측정','안전조치','입·퇴장','승인·공유'];
  function nonEmpty(name){return String($q(`#permitForm [name="${name}"]`)?.value||'').trim()}
  function signHas(role){try{return JSON.parse($q('#'+role+'SignJson')?.value||'[]').some(p=>Array.isArray(p)&&p.length>1)}catch(e){return false}}
- function workerList(type){try{return JSON.parse($q('#'+type+'WorkersJson')?.value||'[]')||[]}catch(e){return[]}}
+ function workerList(type){try{if(typeof workerSigns!=="undefined"&&Array.isArray(workerSigns?.[type]))return workerSigns[type];return JSON.parse($q('#'+type+'WorkersJson')?.value||'[]')||[]}catch(e){return[]}}
  function workerSignedLocal(r){return !!(r&&String(r.name||'').trim()&&Array.isArray(r.paths)&&r.paths.some(p=>Array.isArray(p)&&p.length>1))}
  function clearInvalid(){$$q('.permit-invalid',$q('#permitForm')).forEach(el=>el.classList.remove('permit-invalid'))}
  function markInvalid(selectors){selectors.forEach(sel=>{const el=$q(sel);if(el)el.classList.add('permit-invalid')})}
@@ -1554,6 +1564,9 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
  function validatePermitStep(step,show=true){clearInvalid();const st=permitStepState(step);const pass=st.status==='done'||(step===3&&st.status==='warn');if(!pass&&show){markInvalid(st.fields||[]);showStepAlert(step,st)}return pass}
  function canAdvanceTo(target){if(target<=wizardIndex)return true;for(let s=wizardIndex;s<target;s++){if(!validatePermitStep(s,true))return false}return true}
  window.goPermitWizardStep=function(i,opts={}){const track=$q('#permitWizardTrack');if(!track)return;const slides=$$q('.permit-wizard-slide',track);if(!slides.length)return;const target=Math.max(0,Math.min(Number(i)||0,slides.length-1));if(!opts.force&&target>wizardIndex&&!canAdvanceTo(target)){updatePermitWizardStatus();return false}wizardIndex=target;wizardBusy=true;track.scrollTo({left:slides[wizardIndex].offsetLeft,behavior:opts.instant?'auto':'smooth'});$$q('.permit-wizard-tab').forEach((b,n)=>b.classList.toggle('active',n===wizardIndex));const prev=$q('#permitWizardPrev'),next=$q('#permitWizardNext');if(prev)prev.disabled=wizardIndex===0;if(next)next.textContent=wizardIndex===slides.length-1?'✓ 저장 / 공유 준비':'다음 →';updatePermitWizardStatus();setTimeout(()=>wizardBusy=false,380);return true};
+ let permitStatusTimer=0;
+ function schedulePermitStatus(delay=120){clearTimeout(permitStatusTimer);permitStatusTimer=setTimeout(()=>{try{updatePermitWizardStatus()}catch(e){}},delay)}
+ window.schedulePermitStatus=schedulePermitStatus;
  function initPermitWizard(){const form=$q('#permitForm');if(!form||$q('#permitWizardTrack'))return;const title=$q('.permit-title',form),grids=$$q(':scope > .permit-grid',form),basicGrid=grids[0],extraGrid=grids[1],note=$q(':scope > .permit-note',form),duration=$q('#permitDuration',form),gas=$q('#gasPermitBox',form),table=$q(':scope > .permit-table-wrap',form),workers=$q(':scope > .worker-lines',form),bottom=$q(':scope > .permit-bottom',form),approval=$q('#approvalWorkflow',form),finalCheck=$q(':scope > .final-check',form);if(!basicGrid||!gas||!table||!workers||!approval)return;
    const nav=document.createElement('div');nav.className='permit-wizard-nav';nav.innerHTML=['① 기본정보','② 가스측정','③ 안전조치','④ 입·퇴장','⑤ 승인·공유'].map((x,i)=>`<button type="button" class="permit-wizard-tab ${i===0?'active':''}" data-permit-step="${i}">${x}</button>`).join('');
    const track=document.createElement('div');track.id='permitWizardTrack';track.className='permit-wizard-track';const defs=[['기본정보','작업장·시간·신청자',[basicGrid,note,duration]],['가스농도 측정','사진/카메라 또는 직접입력',[gas]],['안전조치','필요·확인 체크',[table,extraGrid]],['입장·퇴장','작업자별 기록',[workers]],['승인·공유','부서 서명·카카오톡',[bottom,approval,finalCheck]]];defs.forEach(([h,sub,nodes],i)=>{const slide=document.createElement('section');slide.className='permit-wizard-slide';slide.dataset.step=i;slide.innerHTML=`<div class="permit-step-head"><b>${h}</b><span>${sub}</span></div>`;nodes.filter(Boolean).forEach(n=>slide.appendChild(n));track.appendChild(slide)});
@@ -1562,26 +1575,33 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
    $q('#permitWizardPrev').onclick=()=>goPermitWizardStep(wizardIndex-1);
    $q('#permitWizardNext').onclick=()=>{if(wizardIndex>=4){const st=permitStepState(4);if(!st.work&&st.status==='block'){validatePermitStep(4,true);return}try{savePermit()}catch(e){};updatePermitWizardStatus();return}goPermitWizardStep(wizardIndex+1)};
    let timer;track.addEventListener('scroll',()=>{if(wizardBusy)return;clearTimeout(timer);timer=setTimeout(()=>{const left=track.scrollLeft;let best=0,dist=Infinity;$$q('.permit-wizard-slide',track).forEach((el,i)=>{const d=Math.abs(el.offsetLeft-left);if(d<dist){dist=d;best=i}});if(best>wizardIndex&&!validatePermitStep(wizardIndex,true)){goPermitWizardStep(wizardIndex,{force:true});return}wizardIndex=best;$$q('.permit-wizard-tab').forEach((b,n)=>b.classList.toggle('active',n===best));updatePermitWizardStatus()},90)});
-   form.addEventListener('input',()=>setTimeout(updatePermitWizardStatus,0));form.addEventListener('change',()=>setTimeout(updatePermitWizardStatus,0));form.addEventListener('click',()=>setTimeout(updatePermitWizardStatus,70));
+   form.addEventListener('input',()=>schedulePermitStatus(180),{passive:true});form.addEventListener('change',()=>schedulePermitStatus(30));
    updatePermitWizardStatus();
  }
  let sigTarget=null,sigPaths=[],drawing=false,currentPath=null;const modal=$q('#signatureModal'),bigCanvas=$q('#signatureLargeCanvas');
- function drawPaths(){if(!bigCanvas)return;const c=bigCanvas.getContext('2d');c.clearRect(0,0,bigCanvas.width,bigCanvas.height);c.lineCap='round';c.lineJoin='round';c.lineWidth=6;c.strokeStyle='#111';sigPaths.forEach(p=>{if(!p?.length)return;c.beginPath();c.moveTo(p[0][0],p[0][1]);for(let i=1;i<p.length;i++)c.lineTo(p[i][0],p[i][1]);c.stroke()})}
+ function sigContext(){if(!bigCanvas)return null;const c=bigCanvas.getContext('2d');c.lineCap='round';c.lineJoin='round';c.lineWidth=6;c.strokeStyle='#111';return c}
+ function drawPaths(){const c=sigContext();if(!c)return;c.clearRect(0,0,bigCanvas.width,bigCanvas.height);sigPaths.forEach(p=>{if(!p?.length)return;c.beginPath();c.moveTo(p[0][0],p[0][1]);for(let i=1;i<p.length;i++)c.lineTo(p[i][0],p[i][1]);c.stroke()})}
+ function compactSigPaths(paths,maxPts=140){return (Array.isArray(paths)?paths:[]).map(p=>{if(!Array.isArray(p)||p.length<=maxPts)return Array.isArray(p)?p.map(pt=>[pt[0],pt[1]]):[];const step=Math.ceil(p.length/maxPts),out=[];for(let i=0;i<p.length;i+=step)out.push([p[i][0],p[i][1]]);const last=p[p.length-1];if(out.length&&last&&(out[out.length-1][0]!==last[0]||out[out.length-1][1]!==last[1]))out.push([last[0],last[1]]);return out})}
  function modalPos(e){const r=bigCanvas.getBoundingClientRect();return[(e.clientX-r.left)*bigCanvas.width/r.width,(e.clientY-r.top)*bigCanvas.height/r.height]}
- function openSig(target,title,paths){sigTarget=target;sigPaths=Array.isArray(paths)?JSON.parse(JSON.stringify(paths)):[];$q('#signatureModalTitle').textContent=title||'서명';modal.classList.add('open');modal.setAttribute('aria-hidden','false');drawPaths()}
+ function openSig(target,title,paths){sigTarget=target;sigPaths=compactSigPaths(paths||[]);$q('#signatureModalTitle').textContent=title||'서명';modal.classList.add('open');modal.setAttribute('aria-hidden','false');requestAnimationFrame(drawPaths)}
  function closeSig(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');drawing=false;sigTarget=null}
- bigCanvas?.addEventListener('pointerdown',e=>{e.preventDefault();bigCanvas.setPointerCapture(e.pointerId);drawing=true;currentPath=[modalPos(e)];sigPaths.push(currentPath);drawPaths()});bigCanvas?.addEventListener('pointermove',e=>{if(!drawing)return;e.preventDefault();currentPath.push(modalPos(e));drawPaths()});['pointerup','pointercancel'].forEach(ev=>bigCanvas?.addEventListener(ev,()=>{drawing=false}));$q('#signatureModalClear')?.addEventListener('click',()=>{sigPaths=[];drawPaths()});
- $q('#signatureModalSave')?.addEventListener('click',()=>{if(!sigPaths.some(p=>p.length>1)){alert('서명을 입력해주세요.');return}if(sigTarget?.kind==='approval'){const role=sigTarget.role,hidden=$q('#'+role+'SignJson'),at=$q('#'+role+'SignAt');if(hidden)hidden.value=JSON.stringify(sigPaths);if(at)at.value=new Date().toISOString();try{signPads[role]?.load();renderApprovalWorkflow()}catch(e){};refreshApprovalSignButtons()}if(sigTarget?.kind==='worker'){const{type,index}=sigTarget,rec=workerSigns?.[type]?.[index];if(rec){rec.paths=JSON.parse(JSON.stringify(sigPaths));rec.signedAt=new Date().toISOString();rec.source='';syncWorkerSignsHidden();renderWorkerSigns(type);if(type==='entry')renderEntryCopyPicker()}}closeSig();setTimeout(updatePermitWizardStatus,0)});modal?.addEventListener('click',e=>{if(e.target===modal)closeSig()});
+ bigCanvas?.addEventListener('pointerdown',e=>{e.preventDefault();bigCanvas.setPointerCapture(e.pointerId);drawing=true;const p=modalPos(e);currentPath=[p];sigPaths.push(currentPath)});bigCanvas?.addEventListener('pointermove',e=>{if(!drawing||!currentPath)return;e.preventDefault();const p=modalPos(e),prev=currentPath[currentPath.length-1];const dx=p[0]-prev[0],dy=p[1]-prev[1];if(dx*dx+dy*dy<16)return;currentPath.push(p);const c=sigContext();if(!c)return;c.beginPath();c.moveTo(prev[0],prev[1]);c.lineTo(p[0],p[1]);c.stroke()});['pointerup','pointercancel'].forEach(ev=>bigCanvas?.addEventListener(ev,()=>{drawing=false;currentPath=null}));$q('#signatureModalClear')?.addEventListener('click',()=>{sigPaths=[];drawPaths()});
+ $q('#signatureModalSave')?.addEventListener('click',()=>{if(!sigPaths.some(p=>p.length>1)){alert('서명을 입력해주세요.');return}const savedPaths=compactSigPaths(sigPaths);if(sigTarget?.kind==='approval'){const role=sigTarget.role,hidden=$q('#'+role+'SignJson'),at=$q('#'+role+'SignAt');if(hidden)hidden.value=JSON.stringify(savedPaths);if(at)at.value=new Date().toISOString();try{signPads[role]?.load();renderApprovalWorkflow()}catch(e){};refreshApprovalSignButtons()}if(sigTarget?.kind==='worker'){const{type,index}=sigTarget,rec=workerSigns?.[type]?.[index];if(rec){rec.paths=savedPaths;rec.signedAt=new Date().toISOString();rec.source='';syncWorkerSignsHidden();renderWorkerSigns(type);if(type==='entry')renderEntryCopyPicker()}}closeSig();schedulePermitStatus(20)});modal?.addEventListener('click',e=>{if(e.target===modal)closeSig()});
  function approvalPaths(role){try{return JSON.parse($q('#'+role+'SignJson')?.value||'[]')}catch(e){return[]}}
  function refreshApprovalSignButtons(){['work','manage','coop'].forEach(role=>{const card=$q('#'+role+'ApprovalCard');if(!card)return;let btn=card.querySelector('.signature-open-btn');if(!btn){btn=document.createElement('button');btn.type='button';btn.className='signature-open-btn';card.querySelector('.sign-pad')?.appendChild(btn)}const signed=approvalPaths(role).some(p=>p?.length>1);btn.textContent=signed?'✓ 서명 완료 · 다시 서명':'✍ 크게 서명하기';btn.onclick=()=>openSig({kind:'approval',role},role==='work'?'작업부서 담당자 서명':role==='manage'?'작업관리부서 승인 서명':'협조부서 확인 서명',approvalPaths(role))})}
- function enhanceWorkerSignPads(){const old=window.setupWorkerSignPad||setupWorkerSignPad;window.setupWorkerSignPad=setupWorkerSignPad=function(type,i){try{old(type,i)}catch(e){}const canvas=$q('#'+type+'WorkerCanvas'+i),rec=workerSigns?.[type]?.[i];if(!canvas||!rec)return;const pad=canvas.closest('.worker-mini-pad');if(!pad)return;let btn=pad.querySelector('.signature-open-btn');if(!btn){btn=document.createElement('button');btn.type='button';btn.className='signature-open-btn';pad.appendChild(btn)}const linked=type==='exit'&&rec.source==='entry';btn.disabled=linked;btn.textContent=linked?'✓ 입장 서명 사용':workerSigned(rec)?'✓ 서명 완료 · 다시 서명':'✍ 크게 서명하기';btn.onclick=()=>openSig({kind:'worker',type,index:i},`${workerLabel(type)} 작업자 ${i+1} 서명`,rec.paths||[])};try{renderAllWorkerSigns()}catch(e){};setTimeout(updatePermitWizardStatus,0)}
- let permitMobileEnhanced=false,permitMobileObserver=null;
+ function attachWorkerPopupButton(type,i){
+   const canvas=$q('#'+type+'WorkerCanvas'+i),rec=(typeof workerSigns!=="undefined"?workerSigns?.[type]?.[i]:null);if(!canvas||!rec)return;const pad=canvas.closest('.worker-mini-pad');if(!pad)return;let btn=pad.querySelector('.signature-open-btn');if(!btn){btn=document.createElement('button');btn.type='button';btn.className='signature-open-btn';pad.appendChild(btn)}const linked=type==='exit'&&rec.source==='entry';btn.disabled=linked;btn.textContent=linked?'✓ 입장 서명 사용':workerSignedLocal(rec)?'✓ 서명 완료 · 다시 서명':'✍ 크게 서명하기';btn.onclick=()=>openSig({kind:'worker',type,index:i},`${workerLabel(type)} 작업자 ${i+1} 서명`,rec.paths||[])
+ }
+ function enhanceWorkerSignPads(){
+   const old=window.setupWorkerSignPad||setupWorkerSignPad;
+   window.setupWorkerSignPad=setupWorkerSignPad=function(type,i){try{old(type,i)}catch(e){}attachWorkerPopupButton(type,i)};
+   ['entry','exit'].forEach(type=>{const arr=(typeof workerSigns!=="undefined"&&Array.isArray(workerSigns?.[type]))?workerSigns[type]:[];arr.forEach((_,i)=>attachWorkerPopupButton(type,i))})
+ }
+ let permitMobileEnhanced=false;
  window.ensurePermitMobileEnhancements=function(){
    if(permitMobileEnhanced)return;permitMobileEnhanced=true;
    initPermitWizard();enhanceWorkerSignPads();refreshApprovalSignButtons();
-   permitMobileObserver=new MutationObserver(()=>{refreshApprovalSignButtons();$$q('.worker-mini-pad').forEach(pad=>{if(pad.querySelector('.signature-open-btn'))return;const c=pad.querySelector('canvas');if(!c)return;const m=c.id.match(/^(entry|exit)WorkerCanvas(\d+)$/);if(m)try{setupWorkerSignPad(m[1],Number(m[2]))}catch(e){}});setTimeout(updatePermitWizardStatus,0)});
-   const form=$q('#permitForm');if(form)permitMobileObserver.observe(form,{childList:true,subtree:true});
-   setTimeout(updatePermitWizardStatus,0);
+   schedulePermitStatus(20);
  };
  window.addEventListener('resize',()=>{if(permitMobileEnhanced&&innerWidth<=760)refreshApprovalSignButtons()});
  window.updatePermitWizardStatus=updatePermitWizardStatus;
