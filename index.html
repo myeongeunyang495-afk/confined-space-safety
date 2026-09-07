@@ -296,8 +296,50 @@ body.simple-flow-step2.show-ai-brief #signalHeroPanel,body.simple-flow-step2.sho
 
 .bottom-nav.simplified-bottom{grid-template-columns:1fr 1fr!important}.bottom-nav.simplified-bottom button{min-height:56px}
 </style>
+
+<style>
+
+/* ===== TBM ONE-QUESTION WIZARD ===== */
+body.tbm-one-question{background:#f5f7fa;color:#182230;overflow-x:hidden}
+body.tbm-one-question>.compact-header,
+body.tbm-one-question>.stats,
+body.tbm-one-question>.nav,
+body.tbm-one-question>.flow-home-card,
+body.tbm-one-question>.mobile-context,
+body.tbm-one-question>#view-field,
+body.tbm-one-question>#view-near,
+body.tbm-one-question>#view-all,
+body.tbm-one-question>#view-org,
+body.tbm-one-question>#view-data,
+body.tbm-one-question>#view-drill,
+body.tbm-one-question>.mobile-bottom-nav,
+body.tbm-one-question>footer{display:none!important}
+body.tbm-one-question:not(.tbm-permit-open)>#view-permit{display:none!important}
+body.tbm-one-question.tbm-permit-open{background:#10151d}
+body.tbm-one-question.tbm-permit-open>#tbmWizard{display:none!important}
+body.tbm-one-question.tbm-permit-open>#view-permit{display:block!important}
+body.tbm-one-question.tbm-old-open>#tbmWizard{display:none!important}
+body.tbm-one-question.tbm-old-open>#view-all.active,body.tbm-one-question.tbm-old-open>#view-org.active,body.tbm-one-question.tbm-old-open>#view-data.active,body.tbm-one-question.tbm-old-open>#view-drill.active{display:block!important}
+body.tbm-one-question.tbm-old-open .tbm-permit-back{display:block!important}
+#tbmWizard{display:block;min-height:100dvh;background:#f5f7fa;color:#182230;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif}
+.tbm-shell{width:min(100%,620px);min-height:100dvh;margin:0 auto;display:flex;flex-direction:column;background:#fff;box-shadow:0 0 0 1px #e8edf2}
+.tbm-top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid #e8edf2;padding:12px 16px 10px}
+.tbm-brand{font-weight:950;font-size:18px;letter-spacing:-.5px;color:#143d74}.tbm-brand b{color:#0876d1}.tbm-mini{margin-top:2px;font-size:11px;color:#728094}
+.tbm-progress-row{display:flex;align-items:center;gap:10px;margin-top:10px}.tbm-progress{height:6px;background:#e7ecf2;border-radius:999px;overflow:hidden;flex:1}.tbm-progress>i{display:block;height:100%;width:0;background:#1681d9;border-radius:999px;transition:width .2s ease}.tbm-step-count{font-size:11px;font-weight:900;color:#607086;min-width:42px;text-align:right}
+.tbm-stage{flex:1;display:flex;flex-direction:column;padding:22px 16px 110px;min-height:0}
+.tbm-screen{display:none;animation:tbmFade .16s ease}.tbm-screen.active{display:block}@keyframes tbmFade{from{opacity:.4;transform:translateX(8px)}to{opacity:1;transform:none}}
+.tbm-kicker{font-size:12px;font-weight:900;color:#1681d9;margin-bottom:7px}.tbm-question{font-size:25px;line-height:1.28;letter-spacing:-.8px;margin:0;color:#162033;font-weight:950}.tbm-help{font-size:14px;line-height:1.55;color:#69788d;margin:9px 0 18px}.tbm-search{width:100%;height:58px;border:2px solid #cfd8e3;border-radius:14px;background:#fff;font-size:18px;padding:0 15px;outline:none;color:#172033}.tbm-search:focus{border-color:#1681d9;box-shadow:0 0 0 4px rgba(22,129,217,.09)}
+.tbm-results{display:grid;gap:8px;margin-top:12px}.tbm-choice{width:100%;border:1px solid #dbe2ea;background:#fff;border-radius:14px;padding:13px 14px;text-align:left;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;color:#1a2638;box-shadow:0 2px 7px rgba(30,50,80,.04)}.tbm-choice:active{transform:scale(.99)}.tbm-choice strong{display:block;font-size:16px;line-height:1.25}.tbm-choice small{display:block;margin-top:4px;color:#738196;font-size:12px;line-height:1.4}.tbm-choice .arr{font-size:25px;color:#9aa7b7}.tbm-empty{padding:18px;border:1px dashed #cfd8e3;border-radius:14px;text-align:center;color:#718096;font-size:13px;line-height:1.55;margin-top:12px}
+.tbm-info-card{border:1px solid #dce3eb;border-radius:16px;background:#f9fbfd;padding:14px;margin-top:14px}.tbm-info-card.highlight{border-color:#a9cae8;background:#f1f8fe}.tbm-info-card.warn{border-color:#efc472;background:#fff9ed}.tbm-info-card.danger{border-color:#e7aaa6;background:#fff4f3}.tbm-info-row{display:grid;grid-template-columns:95px 1fr;gap:8px;padding:7px 0;border-bottom:1px solid #e8edf2}.tbm-info-row:last-child{border:0}.tbm-info-row span{font-size:12px;color:#738196;font-weight:800}.tbm-info-row b{font-size:14px;line-height:1.45;color:#1b2636;word-break:keep-all}.tbm-risk{font-size:19px;font-weight:950;color:#b43c34;line-height:1.4}.tbm-rule-list{display:grid;gap:9px;margin-top:14px}.tbm-rule{display:flex;gap:10px;align-items:flex-start;border-radius:13px;background:#f4f7fa;padding:11px 12px}.tbm-rule i{font-style:normal;font-size:22px}.tbm-rule b{font-size:14px;line-height:1.45}.tbm-equip{display:grid;gap:9px;margin-top:12px}.tbm-equip-row{border:1px solid #dce4ec;border-radius:14px;padding:12px 13px;background:#fff}.tbm-equip-row strong{font-size:15px}.tbm-equip-row p{font-size:12px;color:#69788d;margin:5px 0 0;line-height:1.45}
+.tbm-video-btn{display:flex;width:100%;min-height:68px;border:0;border-radius:16px;background:#132a49;color:white;font-size:18px;font-weight:950;align-items:center;justify-content:center;gap:9px;margin-top:15px;text-decoration:none}.tbm-video-note{font-size:11px;color:#7a8798;text-align:center;margin-top:8px}.tbm-actions{position:fixed;z-index:40;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,620px);background:linear-gradient(to top,#fff 76%,rgba(255,255,255,.9));border-top:1px solid #e5ebf1;padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px}.tbm-btn{min-height:56px;border-radius:14px;border:1px solid #ccd7e2;background:#fff;color:#25344a;font-size:16px;font-weight:950;padding:10px 14px;flex:1}.tbm-btn.primary{background:#167dcc;border-color:#167dcc;color:#fff}.tbm-btn.good{background:#148653;border-color:#148653;color:#fff}.tbm-btn.bad{background:#bd3d35;border-color:#bd3d35;color:#fff}.tbm-btn.secondary{flex:0 0 auto;min-width:82px}.tbm-btn:disabled{opacity:.45}
+.tbm-status{border-radius:18px;padding:18px;text-align:center;margin-top:13px}.tbm-status.yellow{background:#fff6df;border:2px solid #e3ad37}.tbm-status.red{background:#fff0ef;border:2px solid #d45a50}.tbm-status.green{background:#edf9f2;border:2px solid #3ba76c}.tbm-status .light{font-size:46px}.tbm-status h3{font-size:23px;margin:5px 0}.tbm-status p{font-size:13px;line-height:1.5;margin:5px 0;color:#58687d}.tbm-small-link{border:0;background:transparent;color:#6b7b8f;text-decoration:underline;font-size:12px;margin:15px auto 0;display:block;padding:8px}
+.tbm-stop-inline{width:100%;min-height:52px;margin-top:12px;border:1px solid #e2aaa6;background:#fff4f3;color:#a7352f;border-radius:13px;font-size:14px;font-weight:950}.tbm-edit{margin-top:10px;display:none}.tbm-edit.show{display:block}.tbm-edit select{width:100%;height:50px;border:1px solid #cad4df;border-radius:12px;padding:0 10px;font-size:14px;background:#fff}
+.tbm-more-sheet{position:fixed;z-index:100;inset:0;background:rgba(12,22,35,.48);display:none;align-items:flex-end;justify-content:center}.tbm-more-sheet.open{display:flex}.tbm-more-card{width:min(100%,620px);background:#fff;border-radius:22px 22px 0 0;padding:14px 14px calc(18px + env(safe-area-inset-bottom))}.tbm-more-card h3{margin:5px 4px 12px;font-size:18px}.tbm-more-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tbm-more-grid button{min-height:58px;border:1px solid #d8e0e8;background:#f7f9fb;border-radius:13px;font-size:13px;font-weight:900;color:#26354a}.tbm-permit-back{display:none;position:fixed;z-index:9999;top:10px;left:10px;border:0;border-radius:999px;background:#fff;color:#172033;padding:9px 13px;font-size:13px;font-weight:950;box-shadow:0 4px 20px rgba(0,0,0,.22)}body.tbm-permit-open .tbm-permit-back,body.tbm-old-open .tbm-permit-back{display:block}
+@media(max-width:420px){.tbm-stage{padding:18px 13px 108px}.tbm-question{font-size:23px}.tbm-help{font-size:13px}.tbm-search{height:56px;font-size:17px}.tbm-choice{padding:12px}.tbm-choice strong{font-size:15px}.tbm-actions{padding-left:10px;padding-right:10px}.tbm-btn{font-size:15px}.tbm-info-row{grid-template-columns:82px 1fr}}
+
+</style>
 </head>
-<body class="field-active simple-flow-home simple-flow-ui">
+<body class="field-active simple-flow-home simple-flow-ui tbm-one-question">
 <div id="bootSplash" role="status" aria-live="polite"><div class="boot-box"><div class="boot-mark"></div><div class="boot-title">KORAIL 밀폐 SAFE PASS</div><div class="boot-sub">현장 안전정보를 준비하고 있습니다.</div><div class="boot-fallback">잠시 후 자동으로 열립니다.</div></div></div>
 <div class="shell">
 <header class="compact-header">
@@ -1675,5 +1717,125 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
 // 단순 리스트뷰 초기화: 첫 화면은 단계 목록만 표시
 setTimeout(()=>{try{showSimpleFlowHome()}catch(e){}},60);
 </script>
+
+
+<div id="tbmWizard" aria-live="polite">
+  <div class="tbm-shell">
+    <div class="tbm-top">
+      <div class="tbm-brand"><b>KORAIL</b> 밀폐 SAFE PASS</div>
+      <div class="tbm-mini">밀폐공간 작업 전 TBM · 한 화면에 한 가지씩</div>
+      <div class="tbm-progress-row"><div class="tbm-progress"><i id="tbmProgressBar"></i></div><div class="tbm-step-count" id="tbmStepCount">1 / 8</div></div>
+    </div>
+    <main class="tbm-stage">
+      <section class="tbm-screen active" data-tbm-screen="0">
+        <div class="tbm-kicker">1. 작업장 찾기</div>
+        <h1 class="tbm-question">어디서 작업하나요?</h1>
+        <p class="tbm-help">역 또는 시설 이름만 입력하세요. 전체 목록은 보여주지 않습니다.</p>
+        <input class="tbm-search" id="tbmSiteSearch" type="search" inputmode="search" autocomplete="off" placeholder="예: 수원역, 평택SS">
+        <div class="tbm-results" id="tbmSiteResults"><div class="tbm-empty">역·시설 이름을 입력하면 가까운 이름부터 최대 6개만 보여드립니다.</div></div>
+        <button class="tbm-small-link" type="button" id="tbmMoreOpen">기타 기능</button>
+      </section>
+      <section class="tbm-screen" data-tbm-screen="1">
+        <div class="tbm-kicker">2. 밀폐공간 선택</div>
+        <h1 class="tbm-question">어느 공간에서 작업하나요?</h1>
+        <p class="tbm-help" id="tbmSpaceHelp"></p>
+        <div class="tbm-results" id="tbmSpaceResults"></div>
+      </section>
+      <section class="tbm-screen" data-tbm-screen="2">
+        <div class="tbm-kicker">3. 자동 부서 확인</div>
+        <h1 class="tbm-question">이 작업정보가 맞나요?</h1>
+        <p class="tbm-help">엑셀 데이터를 기준으로 자동으로 연결했습니다.</p>
+        <div class="tbm-info-card highlight" id="tbmDeptCard"></div>
+        <button class="tbm-small-link" type="button" id="tbmDeptEditBtn">작업부서가 다르면 수정</button>
+        <div class="tbm-edit" id="tbmDeptEdit"><select id="tbmDeptSelect"></select></div>
+      </section>
+      <section class="tbm-screen" data-tbm-screen="3">
+        <div class="tbm-kicker">4. 공간 위험 확인</div>
+        <h1 class="tbm-question">이 공간의 위험을 확인했나요?</h1>
+        <div class="tbm-info-card" id="tbmRiskCard"></div>
+        <div class="tbm-rule-list"><div class="tbm-rule"><i>⛔</i><b>이상하면 들어가지 말고 먼저 작업을 중지합니다.</b></div></div>
+      </section>
+      <section class="tbm-screen" data-tbm-screen="4">
+        <div class="tbm-kicker">5. 안전교육</div>
+        <h1 class="tbm-question">안전영상을 확인했나요?</h1>
+        <p class="tbm-help">영상을 보고 오늘 작업에서 꼭 기억할 세 가지만 확인하세요.</p>
+        <a class="tbm-video-btn" href="https://www.youtube.com/watch?v=RlCXqNXBWtI" target="_blank" rel="noopener">▶ 안전영상 보기</a>
+        <div class="tbm-rule-list">
+          <div class="tbm-rule"><i>①</i><b>들어가기 전 산소·유해가스를 측정합니다.</b></div>
+          <div class="tbm-rule"><i>②</i><b>환기가 멈추거나 경보가 나면 즉시 나옵니다.</b></div>
+          <div class="tbm-rule"><i>③</i><b>보호구 없이 구조하러 들어가지 않습니다.</b></div>
+        </div>
+        <div class="tbm-video-note">영상 시청만으로 법정 교육이 자동 완료되는 것은 아닙니다.</div>
+      </section>
+      <section class="tbm-screen" data-tbm-screen="5">
+        <div class="tbm-kicker">6. 장비 확인</div>
+        <h1 class="tbm-question">가스측정기와 보호구가 준비됐나요?</h1>
+        <p class="tbm-help">등록된 장비자료를 먼저 보여드립니다. 실제 현장 비치 여부를 확인하세요.</p>
+        <div class="tbm-equip" id="tbmEquipCard"></div><button class="tbm-stop-inline" type="button" id="tbmEquipStop">⛔ 장비가 없거나 이상이 있습니다</button>
+      </section>
+      <section class="tbm-screen" data-tbm-screen="6">
+        <div class="tbm-kicker">7. 안전조치 확인</div>
+        <h1 class="tbm-question">환기·감시인·연락수단을 모두 확인했나요?</h1>
+        <div class="tbm-rule-list">
+          <div class="tbm-rule"><i>🌬️</i><b>작업 전·작업 중 환기</b></div>
+          <div class="tbm-rule"><i>👀</i><b>외부 감시인 배치</b></div>
+          <div class="tbm-rule"><i>📞</i><b>비상 연락수단 확인</b></div>
+        </div><button class="tbm-stop-inline" type="button" id="tbmMeasureStop">⛔ 하나라도 준비되지 않았습니다</button>
+      </section>
+      <section class="tbm-screen" data-tbm-screen="7">
+        <div class="tbm-kicker">8. 작업허가</div>
+        <h1 class="tbm-question">이제 작업허가서를 작성할까요?</h1>
+        <p class="tbm-help">앞에서 선택한 작업개소·부서정보는 허가서에 자동으로 연결됩니다. 가스농도 측정값도 허가서에서 입력합니다.</p>
+        <div class="tbm-status yellow" id="tbmFinalStatus"><div class="light">🟡</div><h3>작업허가 확인 필요</h3><p>허가서·가스측정·서명이 완료될 때까지 작업을 시작하지 마세요.</p></div>
+      </section>
+    </main>
+    <div class="tbm-actions" id="tbmActions">
+      <button class="tbm-btn secondary" id="tbmPrevBtn" type="button">← 이전</button>
+      <button class="tbm-btn primary" id="tbmNextBtn" type="button">다음 →</button>
+    </div>
+  </div>
+</div>
+<button class="tbm-permit-back" id="tbmPermitBack" type="button">← TBM으로</button>
+<div class="tbm-more-sheet" id="tbmMoreSheet" aria-hidden="true"><div class="tbm-more-card"><h3>기타 기능</h3><div class="tbm-more-grid"><button type="button" data-tbm-old-view="drill">🧯 대응훈련</button><button type="button" data-tbm-old-view="data">📄 데이터관리</button><button type="button" data-tbm-old-view="all">📋 전체목록</button><button type="button" data-tbm-old-view="org">🏢 소속별 보기</button></div><button class="tbm-small-link" type="button" id="tbmMoreClose">닫기</button></div></div>
+
+
+<script>
+/* ===== TBM ONE-QUESTION WIZARD LOGIC ===== */
+(function(){
+ const q=(s,r=document)=>r.querySelector(s), qa=(s,r=document)=>[...r.querySelectorAll(s)];
+ const TOTAL=8;
+ let step=0, pickedSite='', pickedSpaceId=null;
+ const screen=n=>q(`[data-tbm-screen="${n}"]`);
+ function sp(){return spaces.find(x=>x.id===Number(pickedSpaceId))||null}
+ function clean(v){return String(v||'').toLowerCase().replace(/\s+/g,'').replace(/[()（）·ㆍ._\-]/g,'')}
+ function show(n){step=Math.max(0,Math.min(TOTAL-1,n));qa('.tbm-screen').forEach((el,i)=>el.classList.toggle('active',i===step));q('#tbmProgressBar').style.width=`${((step+1)/TOTAL)*100}%`;q('#tbmStepCount').textContent=`${step+1} / ${TOTAL}`;renderActions();window.scrollTo(0,0)}
+ function renderActions(){const p=q('#tbmPrevBtn'),n=q('#tbmNextBtn');p.style.visibility=step===0?'hidden':'visible';n.className='tbm-btn primary';n.disabled=false;if(step===0){n.style.display='none'}else{n.style.display='block'}if(step===1||step===0)n.style.display='none';if(step===2)n.textContent='✓ 맞아요';else if(step===3)n.textContent='✓ 위험 확인';else if(step===4)n.textContent='✓ 영상 확인';else if(step===5)n.textContent='✓ 모두 준비됨';else if(step===6)n.textContent='✓ 모두 확인';else if(step===7){n.textContent='📝 작업허가서 작성';n.className='tbm-btn good'}else n.textContent='다음 →'}
+ function groupSites(query){const n=clean(query);if(!n)return[];const map=new Map();spaces.forEach(s=>{const hay=clean([s.site,s.detailName,s.detailLocation,s.manageNo,s.manageDept,s.workDept].join(' '));if(!hay.includes(n))return;const key=s.site||s.detailLocation||s.manageNo;if(!map.has(key))map.set(key,{site:key,count:0,examples:[]});const g=map.get(key);g.count++;if(g.examples.length<2)g.examples.push(s.detailName)});return [...map.values()].sort((a,b)=>{const as=clean(a.site),bs=clean(b.site);const ae=as===n?0:as.startsWith(n)?1:2,be=bs===n?0:bs.startsWith(n)?1:2;return ae-be||a.site.localeCompare(b.site,'ko')}).slice(0,6)}
+ function renderSiteResults(){const root=q('#tbmSiteResults'),v=q('#tbmSiteSearch').value.trim();if(v.length<1){root.innerHTML='<div class="tbm-empty">역·시설 이름을 입력하면 최대 6개만 보여드립니다.</div>';return}const rows=groupSites(v);root.innerHTML=rows.length?rows.map((r,i)=>`<button class="tbm-choice" type="button" data-tbm-site="${i}"><span><strong>${esc(r.site)}</strong><small>${r.count}개 밀폐공간${r.examples.length?' · '+esc(r.examples.join(' · ')):''}</small></span><span class="arr">›</span></button>`).join(''):`<div class="tbm-empty">검색 결과가 없습니다.<br>역명이나 시설명을 조금 짧게 입력해보세요.</div>`;qa('[data-tbm-site]',root).forEach((b,i)=>b.onclick=()=>{pickedSite=rows[i].site;renderSpaces();show(1)})}
+ function renderSpaces(){const root=q('#tbmSpaceResults');q('#tbmSpaceHelp').textContent=`${pickedSite}에 등록된 공간만 보여드립니다.`;const rows=spaces.filter(s=>(s.site||s.detailLocation||s.manageNo)===pickedSite||s.site===pickedSite);root.innerHTML=rows.length?rows.map(s=>`<button class="tbm-choice" type="button" data-tbm-space="${s.id}"><span><strong>${esc(s.detailName||s.category||'밀폐공간')}</strong><small>${esc(s.manageNo)}${s.detailLocation?' · '+esc(s.detailLocation):''}</small></span><span class="arr">›</span></button>`).join(''):'<div class="tbm-empty">등록된 세부 밀폐공간을 찾지 못했습니다.</div>';qa('[data-tbm-space]',root).forEach(b=>b.onclick=()=>chooseSpace(Number(b.dataset.tbmSpace)))}
+ function chooseSpace(id){const s=spaces.find(x=>x.id===Number(id));if(!s)return;pickedSpaceId=s.id;selectedId=fieldSelectedId=permitSelectedId=s.id;setWorkerContextForSpace(s);step1Site=s.site;step1CandidateId=s.id;try{localStorage.setItem('tbmRecentSpace',String(s.id))}catch(e){};renderDept();renderRisk();renderEquip();show(2)}
+ function managerText(c){return c.group==='korail'?'없음 · 공사 직접작업':(c.manageDept||(c.group==='subsidiary'?'공사 관리사업소 확인 필요':'발주처 확인 필요'))}
+ function renderDept(){const s=sp();if(!s)return;const c=workContextFor(s);q('#tbmDeptCard').innerHTML=`<div class="tbm-info-row"><span>작업개소</span><b>${esc(s.site)} · ${esc(s.detailName)}</b></div><div class="tbm-info-row"><span>작업부서</span><b>${esc(c.workDept)}</b></div><div class="tbm-info-row"><span>작업관리부서</span><b>${esc(managerText(c))}</b></div><div class="tbm-info-row"><span>협조부서</span><b>${esc(c.coopDept||'해당 역 확인 필요')}</b></div>`;const depts=uniq(splitWorkDepts(s.workDept).map(canonicalDeptName));const sel=q('#tbmDeptSelect');sel.innerHTML=depts.map(d=>`<option value="${esc(d)}" ${d===c.workDept?'selected':''}>${esc(d)}</option>`).join('')||`<option>${esc(c.workDept)}</option>`}
+ function renderRisk(){const s=sp();if(!s)return;q('#tbmRiskCard').innerHTML=`<div class="tbm-risk">⚠ ${esc(s.hazards||'질식·산소결핍 등 밀폐공간 위험')}</div><div class="tbm-info-row"><span>세부위치</span><b>${esc(s.detailLocation||s.site)}</b></div><div class="tbm-info-row"><span>평상 작업</span><b>${esc(s.internalWork||'작업내용 현장 확인')}</b></div><div class="tbm-info-row"><span>관리번호</span><b>${esc(s.manageNo)}</b></div>`}
+ function equipText(rows,type){if(!rows||!rows.length)return '장비자료에서 확인되지 않음 · 현장 확인 필요';const vals=[];rows.slice(0,3).forEach(e=>{if(type==='gas')vals.push([e.dept,e.gasType,e.gasQty?e.gasQty+'대':''].filter(Boolean).join(' · '));else vals.push([e.dept,e.respType,e.respQty?e.respQty+'개':''].filter(Boolean).join(' · '))});return vals.join(' / ')}
+ function renderEquip(){const s=sp();if(!s)return;const ev=evidenceFor(s);q('#tbmEquipCard').innerHTML=`<div class="tbm-equip-row"><strong>📟 가스농도측정기</strong><p>${esc(equipText(ev.gasRows,'gas'))}</p></div><div class="tbm-equip-row"><strong>🦺 보호구·구조장비</strong><p>${esc(equipText(ev.ppeRows,'ppe'))}</p></div>`}
+ function setCheck(key,val='yes'){const s=sp();if(!s)return;const c=getChecks(s);c[key]=val;saveChecks(s,c)}
+ function openPermit(){const s=sp();if(!s)return;permitSelectedId=s.id;selectedId=fieldSelectedId=s.id;try{loadPermitForSpace(s)}catch(e){console.warn(e)};document.body.classList.add('tbm-permit-open');showView('permit');setTimeout(()=>window.ensurePermitMobileEnhancements?.(),0)}
+ function updateFinal(){const s=sp();if(!s)return;const c=getChecks(s),sig=signalInfo(c),box=q('#tbmFinalStatus');box.className='tbm-status '+sig.state;box.innerHTML=`<div class="light">${sig.state==='green'?'🟢':sig.state==='red'?'🔴':'🟡'}</div><h3>${esc(sig.head.replace(/^[^ ]+\s*/,''))}</h3><p>${esc(sig.reason)}</p>`}
+ q('#tbmSiteSearch').addEventListener('input',renderSiteResults);
+ q('#tbmEquipStop').onclick=()=>{setCheck('detector','no');setCheck('ppe','no');updateFinal();show(7)};
+ q('#tbmMeasureStop').onclick=()=>{setCheck('watch','no');updateFinal();show(7)};
+ q('#tbmPrevBtn').onclick=()=>show(step-1);
+ q('#tbmNextBtn').onclick=()=>{if(step===2){show(3)}else if(step===3){show(4)}else if(step===4){setCheck('awareness','yes');show(5)}else if(step===5){setCheck('detector','yes');setCheck('ppe','yes');show(6)}else if(step===6){setCheck('watch','yes');updateFinal();show(7)}else if(step===7)openPermit()};
+ q('#tbmDeptEditBtn').onclick=()=>q('#tbmDeptEdit').classList.toggle('show');q('#tbmDeptSelect').onchange=e=>{const s=sp();if(!s)return;const d=e.target.value;setWorkerContextForSpace(s,deptGroup(d),d);renderDept()};
+ q('#tbmPermitBack').onclick=()=>{const wasPermit=document.body.classList.contains('tbm-permit-open');document.body.classList.remove('tbm-permit-open','tbm-old-open');if(wasPermit){updateFinal();show(7)}else show(0)};
+ q('#tbmMoreOpen').onclick=()=>{q('#tbmMoreSheet').classList.add('open');q('#tbmMoreSheet').setAttribute('aria-hidden','false')};q('#tbmMoreClose').onclick=()=>{q('#tbmMoreSheet').classList.remove('open');q('#tbmMoreSheet').setAttribute('aria-hidden','true')};q('#tbmMoreSheet').onclick=e=>{if(e.target===q('#tbmMoreSheet'))q('#tbmMoreClose').click()};qa('[data-tbm-old-view]').forEach(b=>b.onclick=()=>{q('#tbmMoreClose').click();document.body.classList.add('tbm-old-open');showView(b.dataset.tbmOldView)});
+ const saveBtn=q('#permitSaveBtn');if(saveBtn)saveBtn.addEventListener('click',()=>setTimeout(updateFinal,80));
+ document.body.classList.add('tbm-one-question');
+ try{const rid=Number(localStorage.getItem('tbmRecentSpace'));if(rid&&spaces.some(s=>s.id===rid)){/* 최근값은 자동선택하지 않음: 잘못된 장소 진입 방지 */}}catch(e){}
+ show(0);
+})();
+</script>
+
 </body>
 </html>
