@@ -373,6 +373,7 @@ body.tbm-one-question.tbm-old-open .tbm-permit-back{display:block!important}
       <span class="step-no">3</span><span class="step-icon">📝</span><span class="flow-copy"><strong>작업허가서</strong><small id="homePermitStatus">작업 전 확인 후 작성</small></span><span class="flow-chevron">›</span>
     </button>
   </div>
+  <div class="safe-home-tools"><button type="button" id="safeHomeMoreBtn">☰ 기타 기능</button></div>
 </div>
 <div class="mobile-context" id="mobileContext"></div>
 
@@ -1792,6 +1793,7 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
         <div class="tbm-info-card highlight" id="tbmDeptCard"></div>
         <button class="tbm-small-link" type="button" id="tbmDeptEditBtn">작업부서가 다르면 수정</button>
         <div class="tbm-edit" id="tbmDeptEdit"><select id="tbmDeptSelect"></select></div>
+        <button class="tbm-stage1-complete" type="button" id="tbmStage1CompleteBtn">✓ 1단계 완료 · 2단계로</button>
       </section>
       <section class="tbm-screen" data-tbm-screen="3">
         <div class="tbm-kicker">4. 공간 위험 확인</div>
@@ -1840,7 +1842,7 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
   </div>
 </div>
 <button class="tbm-permit-back" id="tbmPermitBack" type="button">← TBM으로</button>
-<div class="tbm-more-sheet" id="tbmMoreSheet" aria-hidden="true"><div class="tbm-more-card"><h3>기타 기능</h3><div class="tbm-more-grid"><button type="button" data-tbm-old-view="drill">🧯 대응훈련</button><button type="button" data-tbm-old-view="data">📄 데이터관리</button><button type="button" data-tbm-old-view="all">📋 전체목록</button><button type="button" data-tbm-old-view="org">🏢 소속별 보기</button></div><button class="tbm-small-link" type="button" id="tbmMoreClose">닫기</button></div></div>
+<div class="tbm-more-sheet" id="tbmMoreSheet" aria-hidden="true"><div class="tbm-more-card"><h3>기타 기능</h3><div class="tbm-more-grid"><button type="button" data-tbm-old-view="drill">🧯 대응훈련</button><button type="button" data-tbm-old-view="data">📄 데이터관리</button><button type="button" data-tbm-old-view="all">📋 전체 밀폐공간</button><button type="button" data-tbm-old-view="org">🏢 소속별 보기</button></div><button class="tbm-small-link" type="button" id="tbmMoreClose">닫기</button></div></div>
 
 
 <script>
@@ -1946,6 +1948,15 @@ body.tbm-one-question.safe-stage-permit #safeStageBar{display:none!important}
  body.safe-3step-home .flow-copy small{font-size:11px!important}
  #safeStageTitle{font-size:15px}
 }
+
+.safe-home-tools{padding:10px 12px 12px;text-align:center;background:#fff;border-top:1px solid #eef2f6}
+.safe-home-tools button{border:0;background:transparent;color:#5e6f83;font-size:13px;font-weight:900;padding:9px 16px;border-radius:999px}
+.safe-home-tools button:active{background:#eef5fb;color:#126fb8}
+.tbm-stage1-complete{display:block;width:100%;min-height:58px;margin:22px 0 8px;border:0;border-radius:15px;background:#167dcc;color:#fff;font-size:17px;font-weight:950;letter-spacing:-.3px;box-shadow:0 7px 18px rgba(22,125,204,.2)}
+.tbm-stage1-complete:active{transform:translateY(1px);background:#0f6eb8}
+/* 1단계 마지막 화면은 본문 안의 큰 완료 버튼만 사용 */
+body.safe-stage-one #tbmActions{display:none!important}
+@media(max-width:420px){.tbm-stage1-complete{min-height:56px;font-size:16px;margin-top:18px}}
 </style>
 <script id="safeThreeStepLogic">
 (function(){
@@ -1993,11 +2004,16 @@ body.tbm-one-question.safe-stage-permit #safeStageBar{display:none!important}
   function openStage1(){driveTo(0);stageMode(1);setTimeout(()=>$('#tbmSiteSearch')?.focus({preventScroll:true}),120)}
   function openStage2(){if(!stage1Done){home();return}driveTo(3);stageMode(2)}
   function openStage3(){if(!stage2Done){home();return}const s=selected();if(!s){stage1Done=false;stage2Done=false;home();return}try{permitSelectedId=s.id;selectedId=fieldSelectedId=s.id;if(typeof loadPermitForSpace==='function')loadPermitForSpace(s);body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two');body.classList.add('tbm-permit-open','safe-stage-permit');if(typeof showView==='function')showView('permit');setTimeout(()=>window.ensurePermitMobileEnhancements?.(),0);window.scrollTo({top:0,behavior:'auto'})}catch(e){console.error(e);alert('작업허가서를 여는 중 오류가 발생했습니다. 다시 시도해주세요.')}}
+  function completeStage1(){const sid=currentSpaceId();if(!sid){alert('작업개소를 먼저 선택해주세요.');return}if(stage1SpaceId!==null&&stage1SpaceId!==sid)stage2Done=false;stage1SpaceId=sid;stage1Done=true;updateHome();openStage2()}
+  function openOtherView(view){body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two','safe-stage-permit','tbm-permit-open');body.classList.add('tbm-old-open');if(typeof showView==='function')showView(view);if(permitBack)permitBack.textContent='← 단계 목록';window.scrollTo({top:0,behavior:'auto'})}
   btn1.onclick=openStage1;btn2.onclick=openStage2;btn3.onclick=openStage3;stageBack.onclick=home;
-  next.onclick=function(){const idx=activeScreen();if(currentStage===1&&idx===2){const sid=currentSpaceId();if(!sid){alert('작업개소를 먼저 선택해주세요.');return}if(stage1SpaceId!==null&&stage1SpaceId!==sid)stage2Done=false;stage1SpaceId=sid;stage1Done=true;originalNext&&originalNext();home();return}if(currentStage===2&&idx===6){originalNext&&originalNext();stage2Done=true;home();return}originalNext&&originalNext()};
+  $('#tbmStage1CompleteBtn')?.addEventListener('click',completeStage1);
+  $('#safeHomeMoreBtn')?.addEventListener('click',()=>{const sheet=$('#tbmMoreSheet');if(sheet){sheet.classList.add('open');sheet.setAttribute('aria-hidden','false')}});
+  document.querySelectorAll('[data-tbm-old-view]').forEach(b=>{b.onclick=()=>{const sheet=$('#tbmMoreSheet');if(sheet){sheet.classList.remove('open');sheet.setAttribute('aria-hidden','true')}openOtherView(b.dataset.tbmOldView)}});
+  next.onclick=function(){const idx=activeScreen();if(currentStage===1&&idx===2){completeStage1();return}if(currentStage===2&&idx===6){originalNext&&originalNext();stage2Done=true;home();return}originalNext&&originalNext()};
   if(equipStop)equipStop.onclick=function(){originalEquipStop&&originalEquipStop();stage2Done=false;home()};
   if(measureStop)measureStop.onclick=function(){originalMeasureStop&&originalMeasureStop();stage2Done=false;home()};
-  if(permitBack){permitBack.textContent='← 단계 목록';permitBack.onclick=function(){if(body.classList.contains('safe-stage-permit')){body.classList.remove('tbm-permit-open','safe-stage-permit');home();return}originalPermitBack&&originalPermitBack()}}
+  if(permitBack){permitBack.textContent='← 단계 목록';permitBack.onclick=function(){if(body.classList.contains('safe-stage-permit')||body.classList.contains('tbm-old-open')){body.classList.remove('tbm-permit-open','safe-stage-permit','tbm-old-open');home();return}originalPermitBack&&originalPermitBack()}}
   $('#permitSaveBtn')?.addEventListener('click',()=>setTimeout(updateHome,120));
   home();
 })();
