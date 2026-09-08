@@ -1571,6 +1571,51 @@ function printDrill(){const area=$("#drillPrintArea");if(!area)return;const w=wi
   #view-near .cards{max-height:none}
   .ai-brief-card{margin:9px 0;padding:10px;border-radius:12px}.ai-icon{width:36px;height:36px;font-size:19px}.ai-title h3{font-size:15px}.ai-title p{font-size:9.5px}.ai-live-missing{margin:7px 0}.ai-missing-chip{font-size:9px;padding:4px 6px}.ai-run,.ai-speak{min-height:48px;font-size:13px}.ai-summary{font-size:13px;padding:9px}.ai-box{padding:9px}.ai-box ul{font-size:11.5px}.ai-dept{font-size:10.5px;padding:8px}.ai-warning,.ai-local-note{font-size:9.5px}
 }
+
+
+/* ===== FIX: TBM 단일뷰 + 부서정보 가독성 ===== */
+/* 기본 TBM에서는 과거 전체 UI(.shell)를 완전히 숨긴다. */
+body.tbm-one-question > .shell{display:none!important;}
+/* 허가서 또는 기타 관리화면을 명시적으로 열 때만 기존 shell을 사용한다. */
+body.tbm-one-question.tbm-permit-open > .shell,
+body.tbm-one-question.tbm-old-open > .shell{display:block!important;max-width:100%;}
+/* 허가서 모드: shell 안에서는 허가서만 표시 */
+body.tbm-one-question.tbm-permit-open > .shell > .compact-header,
+body.tbm-one-question.tbm-permit-open > .shell > .stats,
+body.tbm-one-question.tbm-permit-open > .shell > .nav,
+body.tbm-one-question.tbm-permit-open > .shell > .flow-home-card,
+body.tbm-one-question.tbm-permit-open > .shell > .mobile-context,
+body.tbm-one-question.tbm-permit-open > .shell > .mobile-bottom-nav,
+body.tbm-one-question.tbm-permit-open > .shell > .bottom-nav,
+body.tbm-one-question.tbm-permit-open > .shell > footer{display:none!important;}
+body.tbm-one-question.tbm-permit-open > .shell > .view{display:none!important;}
+body.tbm-one-question.tbm-permit-open > .shell > #view-permit{display:block!important;}
+/* 기타 모드: 선택한 기존 화면 하나만 표시 */
+body.tbm-one-question.tbm-old-open > .shell > .compact-header,
+body.tbm-one-question.tbm-old-open > .shell > .stats,
+body.tbm-one-question.tbm-old-open > .shell > .nav,
+body.tbm-one-question.tbm-old-open > .shell > .flow-home-card,
+body.tbm-one-question.tbm-old-open > .shell > .mobile-context,
+body.tbm-one-question.tbm-old-open > .shell > .mobile-bottom-nav,
+body.tbm-one-question.tbm-old-open > .shell > .bottom-nav,
+body.tbm-one-question.tbm-old-open > .shell > footer{display:none!important;}
+body.tbm-one-question.tbm-old-open > .shell > .view{display:none!important;}
+body.tbm-one-question.tbm-old-open > .shell > .view.active{display:block!important;}
+
+/* 작업부서/작업관리부서/협조부서: 고령 작업자용 고대비 카드 */
+#tbmDeptCard{padding:10px!important;background:#eef7ff!important;border:2px solid #9fc8eb!important;}
+#tbmDeptCard .tbm-info-row{display:block!important;background:#fff;border:1px solid #cbdbe9!important;border-radius:13px;padding:12px 13px!important;margin:8px 0!important;}
+#tbmDeptCard .tbm-info-row:last-child{border:1px solid #cbdbe9!important;}
+#tbmDeptCard .tbm-info-row span{display:block!important;font-size:13px!important;line-height:1.3!important;color:#075f9f!important;font-weight:950!important;margin-bottom:5px!important;letter-spacing:-.2px;}
+#tbmDeptCard .tbm-info-row b{display:block!important;font-size:17px!important;line-height:1.45!important;color:#101828!important;font-weight:950!important;word-break:keep-all!important;overflow-wrap:anywhere;}
+#tbmDeptCard .tbm-info-row:first-child{background:#f7f9fc!important;}
+#tbmDeptCard .tbm-info-row:first-child span{color:#526174!important;}
+#tbmDeptCard .tbm-info-row:first-child b{font-size:16px!important;}
+@media(max-width:420px){
+  #tbmDeptCard .tbm-info-row{padding:11px 12px!important;}
+  #tbmDeptCard .tbm-info-row span{font-size:13px!important;}
+  #tbmDeptCard .tbm-info-row b{font-size:17px!important;}
+}
 </style></head><body>
 ${area.innerHTML}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print()},250)}
 if($("#drillLoadBtn"))$("#drillLoadBtn").onclick=chooseDrillFromInput;
@@ -1714,8 +1759,7 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
   </div>
 </div>
 <script>setTimeout(()=>{const b=document.getElementById('bootSplash');if(b)b.classList.add('hide')},4000);
-// 단순 리스트뷰 초기화: 첫 화면은 단계 목록만 표시
-setTimeout(()=>{try{showSimpleFlowHome()}catch(e){}},60);
+// TBM 단일뷰: 과거 리스트뷰 초기화는 실행하지 않음
 </script>
 
 
@@ -1815,7 +1859,7 @@ setTimeout(()=>{try{showSimpleFlowHome()}catch(e){}},60);
  function renderSpaces(){const root=q('#tbmSpaceResults');q('#tbmSpaceHelp').textContent=`${pickedSite}에 등록된 공간만 보여드립니다.`;const rows=spaces.filter(s=>(s.site||s.detailLocation||s.manageNo)===pickedSite||s.site===pickedSite);root.innerHTML=rows.length?rows.map(s=>`<button class="tbm-choice" type="button" data-tbm-space="${s.id}"><span><strong>${esc(s.detailName||s.category||'밀폐공간')}</strong><small>${esc(s.manageNo)}${s.detailLocation?' · '+esc(s.detailLocation):''}</small></span><span class="arr">›</span></button>`).join(''):'<div class="tbm-empty">등록된 세부 밀폐공간을 찾지 못했습니다.</div>';qa('[data-tbm-space]',root).forEach(b=>b.onclick=()=>chooseSpace(Number(b.dataset.tbmSpace)))}
  function chooseSpace(id){const s=spaces.find(x=>x.id===Number(id));if(!s)return;pickedSpaceId=s.id;selectedId=fieldSelectedId=permitSelectedId=s.id;setWorkerContextForSpace(s);step1Site=s.site;step1CandidateId=s.id;try{localStorage.setItem('tbmRecentSpace',String(s.id))}catch(e){};renderDept();renderRisk();renderEquip();show(2)}
  function managerText(c){return c.group==='korail'?'없음 · 공사 직접작업':(c.manageDept||(c.group==='subsidiary'?'공사 관리사업소 확인 필요':'발주처 확인 필요'))}
- function renderDept(){const s=sp();if(!s)return;const c=workContextFor(s);q('#tbmDeptCard').innerHTML=`<div class="tbm-info-row"><span>작업개소</span><b>${esc(s.site)} · ${esc(s.detailName)}</b></div><div class="tbm-info-row"><span>작업부서</span><b>${esc(c.workDept)}</b></div><div class="tbm-info-row"><span>작업관리부서</span><b>${esc(managerText(c))}</b></div><div class="tbm-info-row"><span>협조부서</span><b>${esc(c.coopDept||'해당 역 확인 필요')}</b></div>`;const depts=uniq(splitWorkDepts(s.workDept).map(canonicalDeptName));const sel=q('#tbmDeptSelect');sel.innerHTML=depts.map(d=>`<option value="${esc(d)}" ${d===c.workDept?'selected':''}>${esc(d)}</option>`).join('')||`<option>${esc(c.workDept)}</option>`}
+ function renderDept(){const s=sp();if(!s)return;const c=workContextFor(s);q('#tbmDeptCard').innerHTML=`<div class="tbm-info-row"><span>📍 작업개소</span><b>${esc(s.site)} · ${esc(s.detailName)}</b></div><div class="tbm-info-row"><span>👷 작업부서</span><b>${esc(c.workDept)}</b></div><div class="tbm-info-row"><span>🏢 작업관리부서</span><b>${esc(managerText(c))}</b></div><div class="tbm-info-row"><span>🚉 협조부서</span><b>${esc(c.coopDept||'해당 역 확인 필요')}</b></div>`;const depts=uniq(splitWorkDepts(s.workDept).map(canonicalDeptName));const sel=q('#tbmDeptSelect');sel.innerHTML=depts.map(d=>`<option value="${esc(d)}" ${d===c.workDept?'selected':''}>${esc(d)}</option>`).join('')||`<option>${esc(c.workDept)}</option>`}
  function renderRisk(){const s=sp();if(!s)return;q('#tbmRiskCard').innerHTML=`<div class="tbm-risk">⚠ ${esc(s.hazards||'질식·산소결핍 등 밀폐공간 위험')}</div><div class="tbm-info-row"><span>세부위치</span><b>${esc(s.detailLocation||s.site)}</b></div><div class="tbm-info-row"><span>평상 작업</span><b>${esc(s.internalWork||'작업내용 현장 확인')}</b></div><div class="tbm-info-row"><span>관리번호</span><b>${esc(s.manageNo)}</b></div>`}
  function equipText(rows,type){if(!rows||!rows.length)return '장비자료에서 확인되지 않음 · 현장 확인 필요';const vals=[];rows.slice(0,3).forEach(e=>{if(type==='gas')vals.push([e.dept,e.gasType,e.gasQty?e.gasQty+'대':''].filter(Boolean).join(' · '));else vals.push([e.dept,e.respType,e.respQty?e.respQty+'개':''].filter(Boolean).join(' · '))});return vals.join(' / ')}
  function renderEquip(){const s=sp();if(!s)return;const ev=evidenceFor(s);q('#tbmEquipCard').innerHTML=`<div class="tbm-equip-row"><strong>📟 가스농도측정기</strong><p>${esc(equipText(ev.gasRows,'gas'))}</p></div><div class="tbm-equip-row"><strong>🦺 보호구·구조장비</strong><p>${esc(equipText(ev.ppeRows,'ppe'))}</p></div>`}
