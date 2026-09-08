@@ -1881,5 +1881,127 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
 })();
 </script>
 
+
+<style id="safeThreeStepStyles">
+/* ===== 3단계 순차형 모바일 홈: 중복 화면 제거 ===== */
+body.tbm-one-question.safe-3step-home{background:#f3f6f9!important;color:#111827!important;overflow-x:hidden}
+body.tbm-one-question.safe-3step-home > .shell{display:block!important;width:min(100%,520px)!important;max-width:520px!important;min-height:100dvh!important;margin:0 auto!important;padding:0 12px 24px!important;background:#f3f6f9!important;box-shadow:none!important}
+body.tbm-one-question.safe-3step-home > .shell > *{display:none!important}
+body.tbm-one-question.safe-3step-home > .shell > .compact-header,
+body.tbm-one-question.safe-3step-home > .shell > .flow-home-card{display:block!important}
+body.tbm-one-question.safe-3step-home #tbmWizard{display:none!important}
+body.tbm-one-question.safe-3step-home #safeStageBar{display:none!important}
+body.safe-3step-home .compact-header{margin:0!important;padding:18px 4px 10px!important;border:0!important;background:transparent!important;position:static!important}
+body.safe-3step-home .compact-header .brand-line{font-size:20px!important;line-height:1.2!important;font-weight:950!important;color:#102a4f!important}
+body.safe-3step-home .compact-header .brand-korail{color:#0877d1!important}
+body.safe-3step-home .compact-header .brand-sub,
+body.safe-3step-home .compact-header .site-line{display:none!important}
+body.safe-3step-home .flow-home-card{margin:0!important;max-width:none!important;border:1px solid #d8e0e9!important;border-radius:18px!important;background:#fff!important;box-shadow:0 8px 24px rgba(20,38,60,.08)!important;overflow:hidden!important}
+body.safe-3step-home .flow-home-head{display:none!important}
+body.safe-3step-home .mobile-primary.flow-list{display:block!important;margin:0!important}
+body.safe-3step-home .flow-list .flow-list-item{display:grid!important;width:100%!important;grid-template-columns:34px 32px minmax(0,1fr) 18px!important;gap:10px!important;min-height:82px!important;padding:14px 15px!important;border:0!important;border-bottom:1px solid #e2e7ee!important;border-radius:0!important;background:#fff!important;color:#172033!important;opacity:1!important;box-shadow:none!important;text-align:left!important;cursor:pointer!important}
+body.safe-3step-home .flow-list .flow-list-item:last-child{border-bottom:0!important}
+body.safe-3step-home .flow-list .flow-list-item .step-no{position:static!important;width:28px!important;height:28px!important;border-radius:50%!important;background:#e9eef5!important;color:#56667a!important;font-size:12px!important;font-weight:950!important}
+body.safe-3step-home .flow-list .flow-list-item .step-icon{display:block!important;margin:0!important;font-size:23px!important;filter:none!important}
+body.safe-3step-home .flow-copy strong{font-size:17px!important;line-height:1.3!important;color:#172033!important;font-weight:950!important;letter-spacing:-.4px!important}
+body.safe-3step-home .flow-copy small{display:block!important;margin-top:4px!important;font-size:12px!important;line-height:1.35!important;color:#6c7a8d!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+body.safe-3step-home .flow-chevron{font-size:25px!important;color:#9aa7b7!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-active{background:#f7fbff!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-active .step-no{background:#1681d9!important;color:#fff!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-done{background:#f5fbf7!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-done .step-no{background:#178451!important;color:#fff!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-done .flow-copy small{color:#18734a!important;font-weight:800!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-danger{background:#fff5f4!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-danger .step-no{background:#bd3d35!important;color:#fff!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-disabled,
+body.safe-3step-home .flow-list .flow-list-item:disabled{background:#edf0f4!important;color:#9aa4b1!important;cursor:not-allowed!important;opacity:1!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-disabled .step-no,
+body.safe-3step-home .flow-list .flow-list-item:disabled .step-no{background:#d8dee6!important;color:#8b96a5!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-disabled .step-icon,
+body.safe-3step-home .flow-list .flow-list-item:disabled .step-icon{filter:grayscale(1);opacity:.38!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-disabled .flow-copy strong,
+body.safe-3step-home .flow-list .flow-list-item:disabled .flow-copy strong{color:#919ba8!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-disabled .flow-copy small,
+body.safe-3step-home .flow-list .flow-list-item:disabled .flow-copy small{color:#a1aab5!important}
+body.safe-3step-home .flow-list .flow-list-item.stage-disabled .flow-chevron,
+body.safe-3step-home .flow-list .flow-list-item:disabled .flow-chevron{color:#c4cbd3!important}
+body.tbm-one-question.safe-stage-open > .shell{display:none!important}
+body.tbm-one-question.safe-stage-open #tbmWizard{display:block!important;min-height:100dvh!important;background:#fff!important}
+body.tbm-one-question.safe-stage-open #tbmWizard .tbm-top{display:none!important}
+body.tbm-one-question.safe-stage-open #tbmWizard .tbm-shell{width:min(100%,520px)!important;max-width:520px!important;min-height:100dvh!important;margin:0 auto!important;box-shadow:none!important;border-left:1px solid #edf0f4!important;border-right:1px solid #edf0f4!important}
+body.tbm-one-question.safe-stage-open #tbmWizard .tbm-stage{padding-top:18px!important}
+#safeStageBar{display:none;position:sticky;top:0;z-index:80;width:min(100%,520px);margin:0 auto;background:#fff;border-bottom:1px solid #e5eaf0;padding:9px 12px;align-items:center;gap:10px}
+body.safe-stage-open #safeStageBar{display:flex!important}
+#safeStageBack{width:40px;height:40px;border:1px solid #d4dce6;border-radius:12px;background:#fff;color:#1c2b3f;font-size:21px;font-weight:900;line-height:1;flex:0 0 auto}
+#safeStageTitle{font-size:16px;line-height:1.25;color:#172033;font-weight:950;letter-spacing:-.3px}
+body.tbm-one-question.safe-stage-permit #safeStageBar{display:none!important}
+@media(max-width:420px){
+ body.tbm-one-question.safe-3step-home > .shell{padding:0 10px 18px!important}
+ body.safe-3step-home .compact-header{padding:15px 3px 9px!important}
+ body.safe-3step-home .compact-header .brand-line{font-size:18px!important}
+ body.safe-3step-home .flow-list .flow-list-item{min-height:76px!important;padding:12px 12px!important;grid-template-columns:31px 29px minmax(0,1fr) 15px!important;gap:8px!important}
+ body.safe-3step-home .flow-list .flow-list-item .step-no{width:26px!important;height:26px!important;font-size:11px!important}
+ body.safe-3step-home .flow-list .flow-list-item .step-icon{font-size:21px!important}
+ body.safe-3step-home .flow-copy strong{font-size:16px!important}
+ body.safe-3step-home .flow-copy small{font-size:11px!important}
+ #safeStageTitle{font-size:15px}
+}
+</style>
+<script id="safeThreeStepLogic">
+(function(){
+  const $=(s,r=document)=>r.querySelector(s);
+  const body=document.body;
+  const btn1=$('#homeSpaceBtn'), btn2=$('#homeCheckBtn'), btn3=$('#homePermitBtn');
+  const st1=$('#homeSpaceStatus'), st2=$('#homeCheckStatus'), st3=$('#homePermitStatus');
+  const next=$('#tbmNextBtn'), prev=$('#tbmPrevBtn');
+  const equipStop=$('#tbmEquipStop'), measureStop=$('#tbmMeasureStop'), permitBack=$('#tbmPermitBack');
+  if(!btn1||!btn2||!btn3||!next||!prev) return;
+  const originalNext=next.onclick;
+  const originalPrev=prev.onclick;
+  const originalEquipStop=equipStop&&equipStop.onclick;
+  const originalMeasureStop=measureStop&&measureStop.onclick;
+  const originalPermitBack=permitBack&&permitBack.onclick;
+  let stage1Done=false, stage2Done=false, stage1SpaceId=null, currentStage=0;
+  let stageBar=$('#safeStageBar');
+  if(!stageBar){
+    stageBar=document.createElement('div');stageBar.id='safeStageBar';
+    stageBar.innerHTML='<button id="safeStageBack" type="button" aria-label="단계 목록으로">←</button><strong id="safeStageTitle">1단계 · 작업부서 및 개소 확인</strong>';
+    const wiz=$('#tbmWizard');wiz.parentNode.insertBefore(stageBar,wiz);
+  }
+  const stageBack=$('#safeStageBack'), stageTitle=$('#safeStageTitle');
+  function selected(){try{return typeof selectedSpace==='function'?selectedSpace():null}catch(e){return null}}
+  function activeScreen(){const el=$('.tbm-screen.active');return el?Number(el.dataset.tbmScreen):-1}
+  function checksForSelected(){const s=selected();try{return s&&typeof getChecks==='function'?getChecks(s):null}catch(e){return null}}
+  function permitComplete(){const c=checksForSelected();return !!(c&&c.permit==='yes')}
+  function hasStopState(){const c=checksForSelected();return !!(c&&['detector','ppe','watch','awareness'].some(k=>c[k]==='no'))}
+  function currentSpaceId(){const s=selected();return s?Number(s.id):null}
+  function clearStageClasses(btn){btn.classList.remove('blocked','ready','current','danger','caution','complete','stage-active','stage-done','stage-danger','stage-disabled')}
+  function updateHome(){
+    const s=selected();if(!s){stage1Done=false;stage2Done=false;stage1SpaceId=null}
+    [btn1,btn2,btn3].forEach(clearStageClasses);
+    btn1.disabled=false;
+    if(stage1Done&&s){btn1.classList.add('stage-done');st1.textContent=`✓ ${s.site} · ${s.detailName}`}else{btn1.classList.add('stage-active');st1.textContent='먼저 작업부서와 작업개소를 확인하세요'}
+    btn2.disabled=!stage1Done;
+    if(!stage1Done){btn2.classList.add('stage-disabled');st2.textContent='1단계 완료 후 이용할 수 있습니다'}else if(stage2Done){btn2.classList.add('stage-done');st2.textContent='✓ 작업 전 확인 완료'}else if(hasStopState()){btn2.classList.add('stage-danger');st2.textContent='⛔ 미확인·부적정 항목을 다시 확인하세요'}else{btn2.classList.add('stage-active');st2.textContent='교육·장비·환기·감시인을 확인하세요'}
+    btn3.disabled=!stage2Done;
+    if(!stage2Done){btn3.classList.add('stage-disabled');st3.textContent='2단계 완료 후 이용할 수 있습니다'}else if(permitComplete()){btn3.classList.add('stage-done');st3.textContent='✓ 작업허가 승인 완료'}else{btn3.classList.add('stage-active');st3.textContent='작업허가서를 작성하고 순서대로 승인받으세요'}
+    btn2.setAttribute('aria-disabled',String(btn2.disabled));btn3.setAttribute('aria-disabled',String(btn3.disabled));
+  }
+  function home(){currentStage=0;body.classList.add('safe-3step-home');body.classList.remove('safe-stage-open','safe-stage-one','safe-stage-two','safe-stage-permit','tbm-old-open','tbm-permit-open');updateHome();window.scrollTo({top:0,behavior:'auto'})}
+  function stageMode(n){currentStage=n;body.classList.remove('safe-3step-home','tbm-old-open','tbm-permit-open','safe-stage-permit');body.classList.add('safe-stage-open');body.classList.toggle('safe-stage-one',n===1);body.classList.toggle('safe-stage-two',n===2);stageTitle.textContent=n===1?'1단계 · 작업부서 및 개소 확인':'2단계 · 작업 전 확인';window.scrollTo({top:0,behavior:'auto'})}
+  function driveTo(target){let guard=20;while(activeScreen()>target&&guard-->0)originalPrev&&originalPrev();guard=20;while(activeScreen()<target&&guard-->0)originalNext&&originalNext()}
+  function openStage1(){driveTo(0);stageMode(1);setTimeout(()=>$('#tbmSiteSearch')?.focus({preventScroll:true}),120)}
+  function openStage2(){if(!stage1Done){home();return}driveTo(3);stageMode(2)}
+  function openStage3(){if(!stage2Done){home();return}const s=selected();if(!s){stage1Done=false;stage2Done=false;home();return}try{permitSelectedId=s.id;selectedId=fieldSelectedId=s.id;if(typeof loadPermitForSpace==='function')loadPermitForSpace(s);body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two');body.classList.add('tbm-permit-open','safe-stage-permit');if(typeof showView==='function')showView('permit');setTimeout(()=>window.ensurePermitMobileEnhancements?.(),0);window.scrollTo({top:0,behavior:'auto'})}catch(e){console.error(e);alert('작업허가서를 여는 중 오류가 발생했습니다. 다시 시도해주세요.')}}
+  btn1.onclick=openStage1;btn2.onclick=openStage2;btn3.onclick=openStage3;stageBack.onclick=home;
+  next.onclick=function(){const idx=activeScreen();if(currentStage===1&&idx===2){const sid=currentSpaceId();if(!sid){alert('작업개소를 먼저 선택해주세요.');return}if(stage1SpaceId!==null&&stage1SpaceId!==sid)stage2Done=false;stage1SpaceId=sid;stage1Done=true;originalNext&&originalNext();home();return}if(currentStage===2&&idx===6){originalNext&&originalNext();stage2Done=true;home();return}originalNext&&originalNext()};
+  if(equipStop)equipStop.onclick=function(){originalEquipStop&&originalEquipStop();stage2Done=false;home()};
+  if(measureStop)measureStop.onclick=function(){originalMeasureStop&&originalMeasureStop();stage2Done=false;home()};
+  if(permitBack){permitBack.textContent='← 단계 목록';permitBack.onclick=function(){if(body.classList.contains('safe-stage-permit')){body.classList.remove('tbm-permit-open','safe-stage-permit');home();return}originalPermitBack&&originalPermitBack()}}
+  $('#permitSaveBtn')?.addEventListener('click',()=>setTimeout(updateHome,120));
+  home();
+})();
+</script>
+
 </body>
 </html>
