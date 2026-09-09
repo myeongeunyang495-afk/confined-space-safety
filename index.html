@@ -1623,8 +1623,8 @@ if($("#drillLoadBtn"))$("#drillLoadBtn").onclick=chooseDrillFromInput;
 if($("#drillSpaceSearch"))$("#drillSpaceSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();chooseDrillFromInput()}});
 if($("#drillUseField"))$("#drillUseField").onclick=()=>{const id=fieldSelectedId||selectedId;if(!id){alert("현재 선택된 작업개소가 없습니다. 훈련 장소를 검색해주세요.");return}const s=spaces.find(x=>x.id===Number(id));if(s)setDrillSpace(s)};
 
-function refresh(){stats();renderFilters();renderAllList();renderOrgList();renderFieldOptions();renderDrillOptions();renderField();$("#nearList").innerHTML='<div class="detail-empty">현재 위치를 먼저 확인해주세요.</div>';$("#detail").innerHTML='<div class="detail-empty">← 주변 목록 또는 전체 목록에서 밀폐공간을 선택하세요.</div>';$("#detailAll").innerHTML='<div class="detail-empty">← 목록에서 항목을 선택하세요.</div>'}
-function refreshCritical(){renderField();$("#nearList").innerHTML='<div class="detail-empty">현재 위치를 먼저 확인해주세요.</div>';$("#detail").innerHTML='<div class="detail-empty">← 주변 목록 또는 전체 목록에서 밀폐공간을 선택하세요.</div>';$("#detailAll").innerHTML='<div class="detail-empty">← 목록에서 항목을 선택하세요.</div>'}
+function refresh(){stats();renderFilters();renderAllList();renderOrgList();renderFieldOptions();renderDrillOptions();renderField();const near=$("#nearList"),detail=$("#detail"),detailAll=$("#detailAll");if(near)near.innerHTML='<div class="detail-empty">현재 위치를 먼저 확인해주세요.</div>';if(detail)detail.innerHTML='<div class="detail-empty">← 주변 목록 또는 전체 목록에서 밀폐공간을 선택하세요.</div>';if(detailAll)detailAll.innerHTML='<div class="detail-empty">← 목록에서 항목을 선택하세요.</div>'}
+function refreshCritical(){renderField();const near=$("#nearList"),detail=$("#detail"),detailAll=$("#detailAll");if(near)near.innerHTML='<div class="detail-empty">현재 위치를 먼저 확인해주세요.</div>';if(detail)detail.innerHTML='<div class="detail-empty">← 주변 목록 또는 전체 목록에서 밀폐공간을 선택하세요.</div>';if(detailAll)detailAll.innerHTML='<div class="detail-empty">← 목록에서 항목을 선택하세요.</div>'}
 function refreshDeferred(){renderFieldOptions();stats();renderFilters();renderAllList();renderOrgList();renderDrillOptions()}
 function hideBootSplash(){const b=document.getElementById("bootSplash");if(!b)return;b.classList.add("hide");setTimeout(()=>b.remove(),220)}
 /* 첫 화면은 내장 데이터로 즉시 그린 뒤, 저장 데이터/부가기능을 뒤에서 복원합니다. */
@@ -1759,7 +1759,7 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
     <div class="signature-modal-tools"><button type="button" class="signature-modal-clear" id="signatureModalClear">지우기</button><button type="button" class="signature-modal-save" id="signatureModalSave">✓ 이 서명 사용</button></div>
   </div>
 </div>
-<script>setTimeout(()=>{const b=document.getElementById('bootSplash');if(b)b.classList.add('hide')},4000);
+<script>setTimeout(()=>{const b=document.getElementById('bootSplash');if(b)b.classList.add('hide')},650);
 // TBM 단일뷰: 과거 리스트뷰 초기화는 실행하지 않음
 </script>
 
@@ -1826,7 +1826,9 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
           <div class="tbm-rule"><i>🌬️</i><b>작업 전·작업 중 환기</b></div>
           <div class="tbm-rule"><i>👀</i><b>외부 감시인 배치</b></div>
           <div class="tbm-rule"><i>📞</i><b>비상 연락수단 확인</b></div>
-        </div><button class="tbm-stop-inline" type="button" id="tbmMeasureStop">⛔ 하나라도 준비되지 않았습니다</button>
+        </div>
+        <button class="tbm-stage2-complete" type="button" id="tbmStage2CompleteBtn">✓ 2단계 완료 · 3단계로</button>
+        <button class="tbm-stop-inline" type="button" id="tbmMeasureStop">⛔ 하나라도 준비되지 않았습니다</button>
       </section>
       <section class="tbm-screen" data-tbm-screen="7">
         <div class="tbm-kicker">8. 작업허가</div>
@@ -1842,7 +1844,14 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
   </div>
 </div>
 <button class="tbm-permit-back" id="tbmPermitBack" type="button">← TBM으로</button>
-<div class="tbm-more-sheet" id="tbmMoreSheet" aria-hidden="true"><div class="tbm-more-card"><h3>기타 기능</h3><div class="tbm-more-grid"><button type="button" data-tbm-old-view="drill">🧯 대응훈련</button><button type="button" data-tbm-old-view="data">📄 데이터관리</button><button type="button" data-tbm-old-view="all">📋 전체 밀폐공간</button><button type="button" data-tbm-old-view="org">🏢 소속별 보기</button></div><button class="tbm-small-link" type="button" id="tbmMoreClose">닫기</button></div></div>
+<div class="tbm-more-sheet" id="tbmMoreSheet" aria-hidden="true"><div class="tbm-more-card"><h3>기타 기능</h3><div class="tbm-more-grid">
+  <button type="button" data-tbm-old-view="near">📍 가까운 작업개소<small>GPS 거리순 조회</small></button>
+  <button type="button" data-tbm-old-view="all">🔎 전체 밀폐공간<small>역·시설·관리번호 검색</small></button>
+  <button type="button" data-tbm-old-view="org">🏢 소속별 보기<small>작업·관리·협조부서</small></button>
+  <button type="button" data-tbm-old-view="drill">🧯 대응훈련<small>반기 훈련 시나리오</small></button>
+  <button type="button" data-tbm-action="ai">🤖 AI 안전브리핑<small>선택 작업개소 맞춤 요약</small></button>
+  <button type="button" data-tbm-old-view="data">📄 데이터 관리<small>관리자용 엑셀 업데이트</small></button>
+</div><button class="tbm-small-link" type="button" id="tbmMoreClose">닫기</button></div></div>
 
 
 <script>
@@ -1957,6 +1966,28 @@ body.tbm-one-question.safe-stage-permit #safeStageBar{display:none!important}
 /* 1단계 마지막 화면은 본문 안의 큰 완료 버튼만 사용 */
 body.safe-stage-one #tbmActions{display:none!important}
 @media(max-width:420px){.tbm-stage1-complete{min-height:56px;font-size:16px;margin-top:18px}}
+.tbm-stage2-complete{display:block;width:100%;min-height:58px;margin:22px 0 8px;border:0;border-radius:15px;background:#148653;color:#fff;font-size:17px;font-weight:950;letter-spacing:-.3px;box-shadow:0 7px 18px rgba(20,134,83,.20)}
+.tbm-stage2-complete:active{transform:translateY(1px);background:#0f7446}
+.tbm-more-grid button small{display:block;margin-top:4px;color:#738296;font-size:10.5px;font-weight:700;line-height:1.35}
+body.safe-stage2-final #tbmActions{display:none!important}
+body.tbm-one-question #bottomNav,body.tbm-one-question .bottom-nav,body.tbm-one-question .mobile-bottom-nav{display:none!important}
+@media(max-width:420px){.tbm-stage2-complete{min-height:56px;font-size:16px;margin-top:18px}.tbm-more-grid button{min-height:68px!important;padding:10px!important;text-align:left!important}.tbm-more-grid button small{font-size:10px}}
+
+</style>
+
+<style id="safeFinalVisibilityFix">
+/* Final visibility guards for mobile 3-step flow */
+body.tbm-one-question.safe-stage-permit > .shell{display:block!important;max-width:100%!important;width:100%!important;padding:0!important;background:#0c1119!important}
+body.tbm-one-question.safe-stage-permit > .shell > *{display:none!important}
+body.tbm-one-question.safe-stage-permit > .shell > #view-permit{display:block!important}
+body.tbm-one-question.safe-stage-permit > #tbmWizard{display:none!important}
+body.tbm-one-question.tbm-old-open > .shell{display:block!important;max-width:100%!important;width:100%!important;padding:54px 12px 28px!important;background:#0c1119!important}
+body.tbm-one-question.tbm-old-open > .shell > *{display:none!important}
+body.tbm-one-question.tbm-old-open > .shell > .view.active{display:block!important}
+body.tbm-one-question.tbm-old-open > #tbmWizard{display:none!important}
+body.tbm-one-question.tbm-old-open.show-ai-brief > .shell > #view-field{display:block!important}
+body.tbm-one-question.tbm-old-open.show-ai-brief #view-field > *:not(#aiBriefCard){display:none!important}
+body.tbm-one-question.tbm-old-open.show-ai-brief #aiBriefCard{display:block!important;margin-top:4px!important}
 </style>
 <script id="safeThreeStepLogic">
 (function(){
@@ -1965,7 +1996,7 @@ body.safe-stage-one #tbmActions{display:none!important}
   const btn1=$('#homeSpaceBtn'), btn2=$('#homeCheckBtn'), btn3=$('#homePermitBtn');
   const st1=$('#homeSpaceStatus'), st2=$('#homeCheckStatus'), st3=$('#homePermitStatus');
   const next=$('#tbmNextBtn'), prev=$('#tbmPrevBtn');
-  const equipStop=$('#tbmEquipStop'), measureStop=$('#tbmMeasureStop'), permitBack=$('#tbmPermitBack');
+  const equipStop=$('#tbmEquipStop'), measureStop=$('#tbmMeasureStop'), permitBack=$('#tbmPermitBack'), stage2Complete=$('#tbmStage2CompleteBtn');
   if(!btn1||!btn2||!btn3||!next||!prev) return;
   const originalNext=next.onclick;
   const originalPrev=prev.onclick;
@@ -1998,19 +2029,23 @@ body.safe-stage-one #tbmActions{display:none!important}
     if(!stage2Done){btn3.classList.add('stage-disabled');st3.textContent='2단계 완료 후 이용할 수 있습니다'}else if(permitComplete()){btn3.classList.add('stage-done');st3.textContent='✓ 작업허가 승인 완료'}else{btn3.classList.add('stage-active');st3.textContent='작업허가서를 작성하고 순서대로 승인받으세요'}
     btn2.setAttribute('aria-disabled',String(btn2.disabled));btn3.setAttribute('aria-disabled',String(btn3.disabled));
   }
-  function home(){currentStage=0;body.classList.add('safe-3step-home');body.classList.remove('safe-stage-open','safe-stage-one','safe-stage-two','safe-stage-permit','tbm-old-open','tbm-permit-open');updateHome();window.scrollTo({top:0,behavior:'auto'})}
-  function stageMode(n){currentStage=n;body.classList.remove('safe-3step-home','tbm-old-open','tbm-permit-open','safe-stage-permit');body.classList.add('safe-stage-open');body.classList.toggle('safe-stage-one',n===1);body.classList.toggle('safe-stage-two',n===2);stageTitle.textContent=n===1?'1단계 · 작업부서 및 개소 확인':'2단계 · 작업 전 확인';window.scrollTo({top:0,behavior:'auto'})}
+  function home(){currentStage=0;body.classList.add('safe-3step-home');body.classList.remove('safe-stage-open','safe-stage-one','safe-stage-two','safe-stage2-final','safe-stage-permit','tbm-old-open','tbm-permit-open','show-ai-brief');updateHome();window.scrollTo({top:0,behavior:'auto'})}
+  function stageMode(n){currentStage=n;body.classList.remove('safe-3step-home','tbm-old-open','tbm-permit-open','safe-stage-permit','safe-stage2-final');body.classList.add('safe-stage-open');body.classList.toggle('safe-stage-one',n===1);body.classList.toggle('safe-stage-two',n===2);stageTitle.textContent=n===1?'1단계 · 작업부서 및 개소 확인':'2단계 · 작업 전 확인';window.scrollTo({top:0,behavior:'auto'})}
   function driveTo(target){let guard=20;while(activeScreen()>target&&guard-->0)originalPrev&&originalPrev();guard=20;while(activeScreen()<target&&guard-->0)originalNext&&originalNext()}
   function openStage1(){driveTo(0);stageMode(1);setTimeout(()=>$('#tbmSiteSearch')?.focus({preventScroll:true}),120)}
-  function openStage2(){if(!stage1Done){home();return}driveTo(3);stageMode(2)}
-  function openStage3(){if(!stage2Done){home();return}const s=selected();if(!s){stage1Done=false;stage2Done=false;home();return}try{permitSelectedId=s.id;selectedId=fieldSelectedId=s.id;if(typeof loadPermitForSpace==='function')loadPermitForSpace(s);body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two');body.classList.add('tbm-permit-open','safe-stage-permit');if(typeof showView==='function')showView('permit');setTimeout(()=>window.ensurePermitMobileEnhancements?.(),0);window.scrollTo({top:0,behavior:'auto'})}catch(e){console.error(e);alert('작업허가서를 여는 중 오류가 발생했습니다. 다시 시도해주세요.')}}
+  function openStage2(){if(!stage1Done){home();return}body.classList.remove('safe-stage2-final');driveTo(3);stageMode(2)}
+  function openStage3(){if(!stage2Done){home();return}const s=selected();if(!s){stage1Done=false;stage2Done=false;home();return}try{permitSelectedId=s.id;selectedId=fieldSelectedId=s.id;if(typeof loadPermitForSpace==='function')loadPermitForSpace(s);body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two','safe-stage2-final');body.classList.add('tbm-permit-open','safe-stage-permit');if(typeof showView==='function')showView('permit');setTimeout(()=>window.ensurePermitMobileEnhancements?.(),0);window.scrollTo({top:0,behavior:'auto'})}catch(e){console.error(e);alert('작업허가서를 여는 중 오류가 발생했습니다. 다시 시도해주세요.')}}
   function completeStage1(){const sid=currentSpaceId();if(!sid){alert('작업개소를 먼저 선택해주세요.');return}if(stage1SpaceId!==null&&stage1SpaceId!==sid)stage2Done=false;stage1SpaceId=sid;stage1Done=true;updateHome();openStage2()}
-  function openOtherView(view){body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two','safe-stage-permit','tbm-permit-open');body.classList.add('tbm-old-open');if(typeof showView==='function')showView(view);if(permitBack)permitBack.textContent='← 단계 목록';window.scrollTo({top:0,behavior:'auto'})}
+  function completeStage2(){if(!stage1Done){home();return}const s=selected();if(!s){stage1Done=false;stage2Done=false;home();return}try{if(typeof getChecks==='function'&&typeof saveChecks==='function'){const c=getChecks(s);c.watch='yes';saveChecks(s,c)}}catch(e){console.warn('stage2 check save',e)}stage2Done=true;body.classList.remove('safe-stage2-final');updateHome();openStage3()}
+  function openOtherView(view){body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two','safe-stage2-final','safe-stage-permit','tbm-permit-open');body.classList.add('tbm-old-open');if(typeof showView==='function')showView(view);try{if(view==='near'&&typeof renderNear==='function')renderNear();if(view==='all'&&typeof renderAllList==='function')renderAllList();if(view==='org'&&typeof renderOrgList==='function')renderOrgList();if(view==='drill'&&typeof renderDrillOptions==='function')renderDrillOptions()}catch(e){console.warn('extra view init',view,e)}if(permitBack)permitBack.textContent='← 단계 목록';window.scrollTo({top:0,behavior:'auto'})}
   btn1.onclick=openStage1;btn2.onclick=openStage2;btn3.onclick=openStage3;stageBack.onclick=home;
   $('#tbmStage1CompleteBtn')?.addEventListener('click',completeStage1);
+  if(stage2Complete)stage2Complete.addEventListener('click',completeStage2);
   $('#safeHomeMoreBtn')?.addEventListener('click',()=>{const sheet=$('#tbmMoreSheet');if(sheet){sheet.classList.add('open');sheet.setAttribute('aria-hidden','false')}});
   document.querySelectorAll('[data-tbm-old-view]').forEach(b=>{b.onclick=()=>{const sheet=$('#tbmMoreSheet');if(sheet){sheet.classList.remove('open');sheet.setAttribute('aria-hidden','true')}openOtherView(b.dataset.tbmOldView)}});
-  next.onclick=function(){const idx=activeScreen();if(currentStage===1&&idx===2){completeStage1();return}if(currentStage===2&&idx===6){originalNext&&originalNext();stage2Done=true;home();return}originalNext&&originalNext()};
+  document.querySelectorAll('[data-tbm-action="ai"]').forEach(b=>{b.onclick=()=>{const sheet=$('#tbmMoreSheet');if(sheet){sheet.classList.remove('open');sheet.setAttribute('aria-hidden','true')}const s=selected();if(!s){alert('AI 브리핑은 먼저 1단계에서 작업개소를 선택해주세요.');openStage1();return}openOtherView('field');document.body.classList.add('show-ai-brief');try{if(typeof renderField==='function')renderField()}catch(e){console.warn(e)}setTimeout(()=>{const card=$('#aiBriefCard');if(card){card.classList.add('ready');card.scrollIntoView({behavior:'smooth',block:'start'})}},80)}});
+  next.onclick=function(){const idx=activeScreen();if(currentStage===1&&idx===2){completeStage1();return}if(currentStage===2&&idx===6){completeStage2();return}originalNext&&originalNext();const now=activeScreen();body.classList.toggle('safe-stage2-final',currentStage===2&&now===6)};
+  prev.onclick=function(){originalPrev&&originalPrev();body.classList.remove('safe-stage2-final')};
   if(equipStop)equipStop.onclick=function(){originalEquipStop&&originalEquipStop();stage2Done=false;home()};
   if(measureStop)measureStop.onclick=function(){originalMeasureStop&&originalMeasureStop();stage2Done=false;home()};
   if(permitBack){permitBack.textContent='← 단계 목록';permitBack.onclick=function(){if(body.classList.contains('safe-stage-permit')||body.classList.contains('tbm-old-open')){body.classList.remove('tbm-permit-open','safe-stage-permit','tbm-old-open');home();return}originalPermitBack&&originalPermitBack()}}
