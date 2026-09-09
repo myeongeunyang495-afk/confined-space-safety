@@ -338,6 +338,35 @@ body.tbm-one-question.tbm-old-open .tbm-permit-back{display:block!important}
 @media(max-width:420px){.tbm-stage{padding:18px 13px 108px}.tbm-question{font-size:23px}.tbm-help{font-size:13px}.tbm-search{height:56px;font-size:17px}.tbm-choice{padding:12px}.tbm-choice strong{font-size:15px}.tbm-actions{padding-left:10px;padding-right:10px}.tbm-btn{font-size:15px}.tbm-info-row{grid-template-columns:82px 1fr}}
 
 </style>
+<style id="permitMobileLayoutFix20260909">
+@media (max-width:760px){
+  body.safe-stage-permit{overflow-x:hidden!important;background:#0c1119!important}
+  body.safe-stage-permit #view-permit{width:100%!important;max-width:100%!important;box-sizing:border-box!important;padding:64px 10px 24px!important;margin:0!important;overflow-x:hidden!important}
+  body.safe-stage-permit .tbm-permit-back{top:10px!important;left:10px!important;padding:9px 14px!important;font-size:14px!important;min-height:42px!important}
+  #view-permit .permit-actions{position:static!important;top:auto!important;z-index:auto!important;display:grid!important;grid-template-columns:minmax(0,1fr) 82px!important;gap:7px!important;background:transparent!important;backdrop-filter:none!important;padding:0!important;margin:0 0 10px!important}
+  #view-permit .permit-actions #permitSpaceSearch{grid-column:auto!important;min-width:0!important;width:100%!important;min-height:46px!important;height:46px!important;margin:0!important;padding:0 12px!important;border:1px solid #36465a!important;border-radius:12px!important;background:#182231!important;color:#f3f6fa!important;font-size:13px!important;font-weight:800!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  #view-permit .permit-actions #permitSaveBtn{width:82px!important;min-width:82px!important;min-height:46px!important;height:46px!important;margin:0!important;padding:0 8px!important;border-radius:12px!important;font-size:13px!important}
+  #view-permit .permit-actions #permitLoadBtn,#view-permit .permit-actions #permitPrintBtn,#view-permit .permit-actions #permitNewBtn{display:none!important}
+  #view-permit .permit-title{display:none!important}
+  #view-permit .permit-wizard-nav{display:none!important}
+  #view-permit .permit-form{width:100%!important;max-width:100%!important;min-width:0!important;padding:0!important;margin:0!important;border:0!important;background:transparent!important;overflow:visible!important}
+  #view-permit .permit-wizard-track{display:flex!important;align-items:flex-start!important;width:100%!important;max-width:100%!important;min-width:0!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scroll-behavior:smooth!important;gap:0!important;padding:0!important;margin:0!important;transition:height .18s ease!important;scrollbar-width:none!important}
+  #view-permit .permit-wizard-track::-webkit-scrollbar{display:none!important}
+  #view-permit .permit-wizard-slide{flex:0 0 100%!important;width:100%!important;max-width:100%!important;min-width:100%!important;box-sizing:border-box!important;scroll-snap-align:start!important;background:#f7f9fb!important;color:#111!important;border-radius:16px!important;padding:14px 13px 16px!important;margin:0!important;box-shadow:none!important;overflow:visible!important}
+  #view-permit .permit-step-head{margin-bottom:8px!important}
+  #view-permit .permit-step-progress{margin:0 0 12px!important;padding:10px 11px!important}
+  #view-permit .permit-wizard-controls{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important;position:static!important;bottom:auto!important;z-index:auto!important;width:100%!important;max-width:100%!important;margin:10px 0 0!important;padding:0!important;background:transparent!important}
+  #view-permit .permit-wizard-controls button{min-height:54px!important;border-radius:13px!important;font-size:15px!important}
+  #view-permit .permit-grid{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+  #view-permit .permit-field{padding:0!important;margin:0!important;min-width:0!important}
+  #view-permit .permit-field label{font-size:12px!important;margin:0 0 6px!important;color:#3a4655!important}
+  #view-permit .permit-field input,#view-permit .permit-field select,#view-permit .permit-field textarea{width:100%!important;max-width:100%!important;box-sizing:border-box!important;min-height:50px!important;border-radius:11px!important;padding:10px 12px!important;font-size:16px!important}
+  #view-permit .permit-field textarea{min-height:88px!important}
+  #view-permit .permit-note{margin:10px 0!important}
+  #view-permit .permit-table-wrap,#view-permit .gas-permit-box,#view-permit .worker-lines,#view-permit .permit-bottom,#view-permit .approval-workflow{max-width:100%!important;min-width:0!important;overflow-x:hidden!important}
+  #view-permit{padding-bottom:calc(28px + env(safe-area-inset-bottom))!important}
+}
+</style>
 </head>
 <body class="field-active simple-flow-home simple-flow-ui tbm-one-question">
 <div id="bootSplash" role="status" aria-live="polite"><div class="boot-box"><div class="boot-mark"></div><div class="boot-title">KORAIL 밀폐 SAFE PASS</div><div class="boot-sub">현장 안전정보를 준비하고 있습니다.</div><div class="boot-fallback">잠시 후 자동으로 열립니다.</div></div></div>
@@ -2143,5 +2172,37 @@ body.tbm-one-question.tbm-old-open.show-ai-brief #aiBriefCard{display:block!impo
 })();
 </script>
 
+<script id="permitMobileLayoutFixJS20260909">
+(function(){
+  let ro=null,clickTimer=0;
+  function activePermitSlide(){
+    const track=document.getElementById('permitWizardTrack');if(!track)return null;
+    const slides=Array.from(track.querySelectorAll('.permit-wizard-slide'));if(!slides.length)return null;
+    const tabs=Array.from(document.querySelectorAll('.permit-wizard-tab'));const active=tabs.findIndex(t=>t.classList.contains('active'));
+    if(active>=0&&slides[active])return slides[active];
+    const left=track.scrollLeft;let best=slides[0],dist=Infinity;
+    slides.forEach(s=>{const d=Math.abs(s.offsetLeft-left);if(d<dist){dist=d;best=s}});return best;
+  }
+  function syncPermitTrackHeight(){
+    if(window.innerWidth>760)return;
+    const track=document.getElementById('permitWizardTrack'),slide=activePermitSlide();if(!track||!slide)return;
+    track.style.height=Math.max(120,Math.ceil(slide.scrollHeight))+'px';
+    if('ResizeObserver' in window){try{if(ro)ro.disconnect();ro=new ResizeObserver(()=>{const s=activePermitSlide();if(s)track.style.height=Math.max(120,Math.ceil(s.scrollHeight))+'px'});ro.observe(slide)}catch(e){}}
+  }
+  function patch(){
+    const origGo=window.goPermitWizardStep;
+    if(origGo&&!origGo.__layoutFix){const wrapped=function(){const r=origGo.apply(this,arguments);requestAnimationFrame(syncPermitTrackHeight);setTimeout(syncPermitTrackHeight,240);return r};wrapped.__layoutFix=true;window.goPermitWizardStep=wrapped}
+    const origEnsure=window.ensurePermitMobileEnhancements;
+    if(origEnsure&&!origEnsure.__layoutFix){const wrapped=function(){const r=origEnsure.apply(this,arguments);requestAnimationFrame(syncPermitTrackHeight);setTimeout(syncPermitTrackHeight,180);return r};wrapped.__layoutFix=true;window.ensurePermitMobileEnhancements=wrapped}
+    const search=document.getElementById('permitSpaceSearch');if(search&&window.innerWidth<=760){search.setAttribute('readonly','readonly');search.setAttribute('aria-label','선택된 작업개소')}
+    syncPermitTrackHeight();
+  }
+  window.addEventListener('resize',()=>setTimeout(syncPermitTrackHeight,60));
+  document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#view-permit')){clearTimeout(clickTimer);clickTimer=setTimeout(syncPermitTrackHeight,100)}});
+  document.addEventListener('input',e=>{if(e.target.closest&&e.target.closest('#view-permit')){clearTimeout(clickTimer);clickTimer=setTimeout(syncPermitTrackHeight,120)}},{passive:true});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(patch,0));else setTimeout(patch,0);
+  setTimeout(patch,500);
+})();
+</script>
 </body>
 </html>
