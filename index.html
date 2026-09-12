@@ -78,15 +78,17 @@ h1{font-size:clamp(25px,3vw,38px);margin:7px 0 7px;letter-spacing:-.03em}.sub{ma
 .drill-top{border:2px solid rgba(180,156,255,.48);background:linear-gradient(135deg,rgba(180,156,255,.10),rgba(20,27,38,.95))}
 .drill-badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--violet);background:rgba(180,156,255,.12);color:#d8caff;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:900;margin-bottom:7px}
 .drill-selectbar{display:grid;grid-template-columns:1fr auto auto;gap:8px;margin-top:12px}.drill-selected{margin-top:10px;background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 13px;font-size:12px;color:var(--dim);line-height:1.6}.drill-selected.ready{border-color:var(--violet);color:var(--text)}
-.drill-safety{border:2px solid var(--red);background:rgba(240,98,95,.08);border-radius:12px;padding:13px 15px;line-height:1.65;margin:14px 0;font-size:12px}.drill-safety b{color:#ff9a98;font-size:14px}.drill-safety ul{margin:7px 0 0;padding-left:18px}
-.drill-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.drill-summary .box{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px}.drill-summary label{display:block;color:var(--dim);font-size:10px;margin-bottom:4px}.drill-summary strong{font-size:12px;line-height:1.45;display:block}
-.drill-headline{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px}.drill-headline h2{margin:0;font-size:22px}.drill-headline .period{font-family:'IBM Plex Mono',monospace;color:var(--violet);font-size:11px;font-weight:800}
+#drillScenario.drill-just-applied .panel{animation:drillApplyFlash 1.1s ease}
+@keyframes drillApplyFlash{0%{box-shadow:0 0 0 3px rgba(255,176,46,.9)}100%{box-shadow:0 0 0 0 rgba(255,176,46,0)}}
+.drill-safety{border:2px solid var(--red);background:rgba(240,98,95,.08);border-radius:12px;padding:13px 15px;line-height:1.65;margin:14px 0;font-size:12px;color:#f3d9d8}.drill-safety b{color:#ff9a98;font-size:14px}.drill-safety ul{margin:7px 0 0;padding-left:18px}.drill-safety li{color:#f3d9d8}
+.drill-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.drill-summary .box{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px}.drill-summary label{display:block;color:var(--dim);font-size:10px;margin-bottom:4px}.drill-summary strong{font-size:12px;line-height:1.45;display:block;color:#e7edf5}
+.drill-headline{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px}.drill-headline h2{margin:0;font-size:22px;color:#e7edf5}.drill-headline .period{font-family:'IBM Plex Mono',monospace;color:var(--violet);font-size:11px;font-weight:800}
 .drill-case{background:#111823;border:2px solid var(--amber);border-radius:13px;padding:15px;margin-top:14px}.drill-case .case-tag{color:var(--amber);font-weight:900;font-size:11px}.drill-case h3{font-size:18px;margin:5px 0 8px}.drill-case p{font-size:13px;line-height:1.75;margin:0;color:#dce5f3}
-.drill-role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.drill-role{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}.drill-role b{display:block;color:var(--cyan);font-size:11px;margin-bottom:4px}.drill-role span{font-size:12px;line-height:1.5}
+.drill-role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.drill-role{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}.drill-role b{display:block;color:var(--cyan);font-size:11px;margin-bottom:4px}.drill-role span{font-size:12px;line-height:1.5;color:#e7edf5}
 .drill-equip{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.drill-equip>div{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px;font-size:12px;line-height:1.6}.drill-equip b{color:var(--green)}
-.drill-timeline{display:grid;gap:9px;margin-top:10px}.drill-step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:11px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px}.drill-step .num{width:42px;height:42px;border-radius:11px;background:rgba(180,156,255,.14);border:1px solid rgba(180,156,255,.5);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;color:var(--violet);font-weight:900}.drill-step h4{font-size:13px;margin:0 0 4px}.drill-step p{font-size:11.5px;line-height:1.65;color:#cbd5e2;margin:0}.drill-step .actor{display:inline-block;margin-top:5px;font-size:10px;color:var(--amber)}
-.drill-facilitator{background:rgba(99,164,255,.07);border:1px solid rgba(99,164,255,.35);border-radius:12px;padding:12px 14px;margin-top:12px}.drill-facilitator summary{cursor:pointer;font-weight:900;font-size:13px}.drill-facilitator ol{margin:10px 0 0;padding-left:21px;font-size:11.5px;line-height:1.75;color:#d2dbea}
-.drill-eval{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.drill-check{display:flex;align-items:flex-start;gap:9px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:11.5px;line-height:1.5;cursor:pointer}.drill-check input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--green)}
+.drill-timeline{display:grid;gap:9px;margin-top:10px}.drill-step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:11px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px}.drill-step .num{width:42px;height:42px;border-radius:11px;background:rgba(180,156,255,.14);border:1px solid rgba(180,156,255,.5);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;color:var(--violet);font-weight:900}.drill-step h4{font-size:13px;margin:0 0 4px;color:#e7edf5}.drill-step p{font-size:11.5px;line-height:1.65;color:#cbd5e2;margin:0}.drill-step .actor{display:inline-block;margin-top:5px;font-size:10px;color:var(--amber)}
+.drill-facilitator{background:rgba(99,164,255,.07);border:1px solid rgba(99,164,255,.35);border-radius:12px;padding:12px 14px;margin-top:12px}.drill-facilitator summary{cursor:pointer;font-weight:900;font-size:13px;color:#e7edf5}.drill-facilitator ol{margin:10px 0 0;padding-left:21px;font-size:11.5px;line-height:1.75;color:#d2dbea}
+.drill-eval{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.drill-check{display:flex;align-items:flex-start;gap:9px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:11.5px;line-height:1.5;cursor:pointer;color:#e7edf5!important}.drill-check span{color:#e7edf5!important}.drill-check input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--green)}
 .drill-record{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.drill-record label{font-size:10px;color:var(--dim)}.drill-record input,.drill-record textarea{margin-top:4px;width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:9px;outline:none}.drill-record textarea{min-height:78px;resize:vertical}.drill-record .wide{grid-column:1/-1}
 .drill-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.drill-status{margin-top:8px;font-size:11px;color:var(--dim)}
 @media(max-width:900px){.drill-summary{grid-template-columns:1fr 1fr}.drill-role-grid{grid-template-columns:1fr}.drill-equip{grid-template-columns:1fr}.drill-record{grid-template-columns:1fr 1fr}}
@@ -218,7 +220,7 @@ body{padding-bottom:88px}
 .kakao-share-note{margin-top:8px;font-size:10.5px;line-height:1.55;color:#7a5c00;background:#fff4c7;border:1px solid #e8cb64;border-radius:8px;padding:8px 10px}
 @media(max-width:760px){
  #view-permit{padding-bottom:86px}.permit-layout{display:block}.permit-side{display:none}
- .permit-actions{position:sticky;top:0;z-index:70;background:#0c1119;padding:6px 0 8px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:6px}
+ .permit-actions{position:sticky;top:max(52px,calc(46px + env(safe-area-inset-top)));z-index:70;background:#0c1119;padding:6px 0 8px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:6px}
  .permit-actions #permitSpaceSearch{grid-column:1/-1;max-width:none!important;min-height:42px}.permit-actions #permitLoadBtn{display:none}.permit-actions #permitSaveBtn{min-height:42px}.permit-actions #permitPrintBtn,.permit-actions #permitNewBtn{display:none}
  .permit-form{padding:0!important;border:0!important;background:transparent!important}.permit-title{font-size:18px!important;margin:8px 2px!important}
  .permit-wizard-nav{display:flex;position:sticky;top:94px;z-index:60;gap:6px;overflow-x:auto;padding:7px 1px 9px;background:#0c1119;scrollbar-width:none}.permit-wizard-nav::-webkit-scrollbar{display:none}
@@ -338,7 +340,7 @@ body.tbm-one-question.tbm-old-open .tbm-permit-back{display:block!important}
 /* 뒤로가기 알약버튼이 상단 콘텐츠와 겹치지 않도록 여백 확보 */
 body.tbm-one-question.tbm-permit-open>.shell,
 body.tbm-one-question.tbm-old-open>.shell{padding-top:calc(56px + env(safe-area-inset-top))!important}
-body.tbm-one-question.tbm-old-open>.shell #view-permit .permit-actions{top:0!important}
+body.tbm-one-question.tbm-old-open>.shell #view-permit .permit-actions{top:max(56px,calc(50px + env(safe-area-inset-top)))!important}
 @media(max-width:420px){.tbm-stage{padding:18px 13px 108px}.tbm-question{font-size:23px}.tbm-help{font-size:13px}.tbm-search{height:56px;font-size:17px}.tbm-choice{padding:12px}.tbm-choice strong{font-size:15px}.tbm-actions{padding-left:10px;padding-right:10px}.tbm-btn{font-size:15px}.tbm-info-row{grid-template-columns:82px 1fr}}
 
 </style>
@@ -419,8 +421,10 @@ body.tbm-one-question.tbm-old-open>.shell #view-permit .permit-actions{top:0!imp
 .precheck-item.warn{background:#fff6e0;color:#7a5200;border:1px solid #f0d78a}
 .precheck-item.info{background:#eef2f6;color:#46525e;border:1px solid #d7dce2}
 .history-warning{margin-top:8px;background:#fdeceb;border:1px solid #f3b7b0;color:#8c1d18;border-radius:10px;padding:9px 10px;font-size:12px;line-height:1.6}
-.alive-float-btn{position:fixed;right:16px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:1750;width:58px;height:58px;border-radius:50%;border:0;background:#7a5cff;color:#fff;font-size:26px;box-shadow:0 8px 22px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.alive-float-btn{position:fixed;right:16px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:99990;width:58px;height:58px;border-radius:50%;border:0;background:#7a5cff;color:#fff;font-size:26px;box-shadow:0 8px 22px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;cursor:pointer}
 .alive-float-btn.hide{display:none}
+.alive-float-panel{z-index:99991!important}
+.alive-alarm-overlay{z-index:99999!important}
 .alive-float-dot{position:absolute;top:6px;right:6px;width:13px;height:13px;border-radius:50%;background:#5a6472;border:2px solid #fff}
 .alive-float-dot.on{background:#2fd67a}
 .alive-float-dot.escalate{background:#ff453a;animation:aliveDotPulse .8s infinite}
@@ -615,17 +619,25 @@ body.tbm-one-question.tbm-old-open>.shell #view-permit .permit-actions{top:0!imp
 
 
 <section id="view-permit" class="view">
+<div class="permit-top-bar">
+  <button class="tbm-permit-back" id="tbmPermitBack" type="button">← 단계 목록</button>
+  <div class="permit-top-actions">
+    <button class="btn" id="permitSaveBtn">💾 저장</button>
+    <button class="btn" id="permitPrintBtn">🖨 인쇄 / PDF</button>
+    <button class="btn" id="permitNewBtn">새 허가서</button>
+  </div>
+</div>
 <div class="permit-layout">
 <div>
-<div class="permit-actions"><input id="permitSpaceSearch" list="permitSpaceOptions" type="text" placeholder="밀폐공간 선택" style="max-width:520px"><datalist id="permitSpaceOptions"></datalist><button class="btn primary" id="permitLoadBtn">선택 공간 불러오기</button><button class="btn" id="permitSaveBtn">💾 저장</button><button class="btn" id="permitPrintBtn">🖨 인쇄 / PDF</button><button class="btn" id="permitNewBtn">새 허가서</button></div><div id="shareImportBanner" class="share-import-banner"></div>
-<form id="permitForm" class="permit-form" onsubmit="return false;">
+<div class="permit-actions"><input id="permitSpaceSearch" list="permitSpaceOptions" type="text" placeholder="밀폐공간 선택" style="max-width:520px"><datalist id="permitSpaceOptions"></datalist><button class="btn primary" id="permitLoadBtn">선택 공간 불러오기</button></div><div id="shareImportBanner" class="share-import-banner"></div>
+<form id="permitForm" class="permit-form" autocomplete="off" onsubmit="return false;">
 <h2 class="permit-title">밀폐공간작업 출입 허가서</h2>
 <div class="permit-grid">
 <div class="permit-field span4"><label>허가일자</label><input name="permitDate" type="date"></div>
-<div class="permit-field"><label>신청자 부서명</label><input name="appDept" type="text"></div><div class="permit-field"><label>직책</label><input name="appTitle" type="text"></div><div class="permit-field span2"><label>성명</label><input name="appName" type="text"></div>
+<div class="permit-field"><label>신청자 부서명</label><input name="appDept" type="text" autocomplete="off"></div><div class="permit-field"><label>직책</label><input name="appTitle" type="text" autocomplete="off"></div><div class="permit-field span2"><label>성명</label><input name="appName" type="text" autocomplete="off"></div>
 <div class="permit-field span2"><label>작업 시작</label><input name="startAt" type="datetime-local"></div><div class="permit-field span2"><label>작업 종료</label><input name="endAt" type="datetime-local"></div>
-<div class="permit-field span4"><label>작업장소</label><input name="place" type="text"></div><div class="permit-field span4"><label>작업내용 <button type="button" id="workContentMicBtn" class="mic-btn">🎙️ 음성 입력</button></label><textarea name="workContent" id="workContentField"></textarea></div>
-<div class="permit-field span4"><label>내부 연락방법 (필요시 번호 기재)</label><input name="contact" type="text"></div>
+<div class="permit-field span4"><label>작업장소</label><input name="place" type="text" autocomplete="off"></div><div class="permit-field span4"><label>작업내용 <button type="button" id="workContentMicBtn" class="mic-btn">🎙️ 음성 입력</button></label><textarea name="workContent" id="workContentField" autocomplete="off"></textarea></div>
+<div class="permit-field span4"><label>내부 연락방법 (필요시 번호 기재)</label><input name="contact" type="text" autocomplete="off"></div>
 </div>
 <div class="permit-note">출입허가는 <b>최대 8시간까지만 유효</b>합니다. 유해가스 농도에 따라 출입시간이 제한될 수 있습니다. 이 허가서는 지정된 장소와 시간에 대해서만 유효하며, 아래 안전보건조치를 확인한 경우에만 출입을 허가합니다.</div>
 <div id="permitDuration" class="permit-dur"></div>
@@ -733,7 +745,7 @@ body.tbm-one-question.tbm-old-open>.shell #view-permit .permit-actions{top:0!imp
 </section>
 </div>
 
-<button type="button" id="aliveFloatToggle" class="alive-float-btn hide" aria-label="생존확인 알람 열기"><span id="aliveFloatIcon">🫀</span><span id="aliveFloatDot" class="alive-float-dot"></span></button>
+<button type="button" id="aliveFloatToggle" class="alive-float-btn" aria-label="생존확인 알람 열기"><span id="aliveFloatIcon">🫀</span><span id="aliveFloatDot" class="alive-float-dot"></span></button>
 
 <div class="alive-float-panel" id="aliveFloatPanel">
   <div class="alive-float-sheet" id="step2AliveCard">
@@ -828,7 +840,7 @@ const norm=s=>String(s||"").toLowerCase().replace(/\s+/g,"").replace(/[()（）�
 const uniq=a=>[...new Set(a.filter(Boolean))];
 const num=v=>{const n=Number(String(v||"").replace(/[^\d.]/g,""));return Number.isFinite(n)?n:0};
 function hav(a,b){const R=6371,rad=x=>x*Math.PI/180,dLat=rad(b.lat-a.lat),dLon=rad(b.lng-a.lng);const q=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(q))}
-function showView(name){document.body.classList.toggle("field-active",name==="field");$$(".view").forEach(v=>v.classList.toggle("active",v.id==="view-"+name));$$(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===name));const bs=$("#bottomSpaceBtn"),bc=$("#bottomCheckBtn"),bp=$("#bottomPermitBtn");if(bs)bs.classList.toggle("active",name==="field");if(bc)bc.classList.toggle("active",name==="field"&&!!selectedSpace());if(bp)bp.classList.toggle("active",name==="permit");if(name==="field"&&typeof renderField==="function")renderField();if(name==="permit"&&typeof window.ensurePermitMobileEnhancements==="function")setTimeout(()=>window.ensurePermitMobileEnhancements(),0);if(name==="drill"&&typeof renderDrill==="function")renderDrill();if(name!=="field")window.scrollTo({top:0,behavior:"smooth"})}
+function showView(name){document.body.classList.toggle("field-active",name==="field");$$(".view").forEach(v=>v.classList.toggle("active",v.id==="view-"+name));$$(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===name));const bs=$("#bottomSpaceBtn"),bc=$("#bottomCheckBtn"),bp=$("#bottomPermitBtn");if(bs)bs.classList.toggle("active",name==="field");if(bc)bc.classList.toggle("active",name==="field"&&!!selectedSpace());if(bp)bp.classList.toggle("active",name==="permit");if(name==="field"&&typeof renderField==="function")renderField();if(name==="permit"&&typeof window.ensurePermitMobileEnhancements==="function")setTimeout(()=>window.ensurePermitMobileEnhancements(),0);if(name==="permit"&&typeof window.syncPermitBackClear==="function"){setTimeout(window.syncPermitBackClear,0);setTimeout(window.syncPermitBackClear,200);setTimeout(window.syncPermitBackClear,600)}if(name==="drill"&&typeof renderDrill==="function")renderDrill();if(name!=="field")window.scrollTo({top:0,behavior:"smooth"})}
 $$(".nav button").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 
 function loadLocal(){
@@ -1446,7 +1458,7 @@ function permitKey(s){return s?.manageNo||"NEW"}
 function renderPermitChecks(saved={}){$("#permitChecklistBody").innerHTML=PERMIT_CHECKS.map((r,i)=>`<tr><td class="cat">${esc(r[0])}</td><td>${esc(r[1])}</td><td class="ck"><input type="checkbox" data-pneed="${i}" ${saved.need?.[i]?"checked":""}></td><td class="ck"><input type="checkbox" data-pok="${i}" ${saved.ok?.[i]?"checked":""}></td></tr>`).join("")}
 function formObject(){syncGasHidden();syncWorkerSignsHidden();const f=$("#permitForm"),o={};new FormData(f).forEach((v,k)=>o[k]=v);o.need=PERMIT_CHECKS.map((_,i)=>!!$(`[data-pneed="${i}"]`)?.checked);o.ok=PERMIT_CHECKS.map((_,i)=>!!$(`[data-pok="${i}"]`)?.checked);o.finalApproved=$("#finalPermitApproved").checked;return o}
 function fillPermit(o={}){const f=$("#permitForm");[...f.elements].forEach(el=>{if(!el.name)return;if(el.type!=="checkbox")el.value=o[el.name]??""});renderPermitChecks(o);$("#finalPermitApproved").checked=!!o.finalApproved;checkPermitDuration();gasMeasure=parseGasMeasure(o.gasMeasureJson||"");renderGasMeasure();loadWorkerSignsFromPermit(o);setTimeout(loadSignPadsFromHidden,0)}
-function loadPermitForSpace(s){permitSelectedId=s.id;const ctx=workContextFor(s);$("#permitSpaceSearch").value=`${s.site} · ${s.detailName} · ${s.manageNo}`;const saved=permitForms[permitKey(s)]||{};fillPermit({...saved,permitDate:saved.permitDate||new Date().toISOString().slice(0,10),appDept:saved.appDept||ctx.workDept,place:saved.place||`${s.site} · ${s.detailLocation||s.detailName}`,workContent:saved.workContent||s.internalWork,coopDept:saved.coopDept||ctx.coopDept,workApproveDept:saved.workApproveDept||ctx.workDept,manageApproveDept:saved.manageApproveDept||(ctx.group==="korail"?"":ctx.manageDept)});$("#permitSideStatus").innerHTML=`선택: <b>${esc(s.site)} · ${esc(s.manageNo)}</b><br>작업부서 <b>${esc(ctx.workDept)}</b> / 작업관리부서 <b>${esc(ctx.group==="korail"?"없음":ctx.manageDept||(ctx.group==="subsidiary"?"공사 관리사업소 확인 필요":"발주처 확인 필요"))}</b> / 협조부서 <b>${esc(ctx.coopDept)}</b>`;setTimeout(()=>{loadSignPadsFromHidden();renderApprovalWorkflow()},0)}
+function loadPermitForSpace(s){permitSelectedId=s.id;const ctx=workContextFor(s);$("#permitSpaceSearch").value=`${s.site} · ${s.detailName} · ${s.manageNo}`;const saved=permitForms[permitKey(s)]||{};fillPermit({...saved,permitDate:saved.permitDate||new Date().toISOString().slice(0,10),appDept:ctx.workDept||saved.appDept,place:saved.place||`${s.site} · ${s.detailLocation||s.detailName}`,workContent:saved.workContent||s.internalWork,coopDept:ctx.coopDept||saved.coopDept,workApproveDept:ctx.workDept||saved.workApproveDept,manageApproveDept:(ctx.group==="korail"?"":ctx.manageDept)||saved.manageApproveDept});$("#permitSideStatus").innerHTML=`선택: <b>${esc(s.site)} · ${esc(s.manageNo)}</b><br>작업부서 <b>${esc(ctx.workDept)}</b> / 작업관리부서 <b>${esc(ctx.group==="korail"?"없음":ctx.manageDept||(ctx.group==="subsidiary"?"공사 관리사업소 확인 필요":"발주처 확인 필요"))}</b> / 협조부서 <b>${esc(ctx.coopDept)}</b>`;setTimeout(()=>{loadSignPadsFromHidden();renderApprovalWorkflow()},0)}
 function choosePermitFromInput(){const s=findSpaceByInput($("#permitSpaceSearch").value);if(!s){alert("밀폐공간을 찾지 못했습니다.");return}loadPermitForSpace(s)}
 $("#permitLoadBtn").onclick=choosePermitFromInput;$("#permitSpaceSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();choosePermitFromInput()}});
 function savePermit(){const s=spaces.find(x=>x.id===Number(permitSelectedId));const o=formObject();permitForms[permitKey(s)]=o;localStorage.setItem(PERMIT_KEY,JSON.stringify(permitForms));if(s){const c=getChecks(s);c.permit=o.finalApproved?"yes":"unknown";saveChecks(s,c);if(fieldSelectedId===s.id)renderField()}$("#permitSideStatus").innerHTML=`<span class="good">허가서 저장 완료</span>${s?` · ${esc(s.manageNo)}`:""}`;renderApprovalWorkflow()}
@@ -1704,7 +1716,7 @@ function renderDrill(){
  $("#drillPrintBtn").onclick=()=>printDrill();
  $("#drillBackField").onclick=()=>{fieldSelectedId=s.id;selectedId=s.id;if($("#fieldSpaceSearch"))$("#fieldSpaceSearch").value=`${s.site} · ${s.detailName} · ${s.manageNo}`;showView("field")};
 }
-function chooseDrillFromInput(){const s=findSpaceByInput($("#drillSpaceSearch").value);if(!s){alert("훈련 장소를 찾지 못했습니다. 목록에서 다시 선택해주세요.");return}setDrillSpace(s)}
+function chooseDrillFromInput(){const s=findSpaceByInput($("#drillSpaceSearch").value);if(!s){alert("훈련 장소를 찾지 못했습니다. 목록에서 다시 선택해주세요.");return}setDrillSpace(s);const box=$("#drillScenario");if(box){box.classList.remove("drill-just-applied");void box.offsetWidth;box.classList.add("drill-just-applied");requestAnimationFrame(()=>box.scrollIntoView({behavior:"smooth",block:"start"}))}}
 function saveDrillRecord(){const s=drillSpace();if(!s)return;const key=drillRecordKey(s);drillRecords[key]={date:$("#drillDate")?.value||"",leader:$("#drillLeader")?.value||"",people:$("#drillPeople")?.value||"",observer:$("#drillObserver")?.value||"",memo:$("#drillMemo")?.value||"",eval:DRILL_EVAL.map((_,i)=>!!$(`[data-drill-eval="${i}"]`)?.checked),variant:drillVariant,savedAt:new Date().toISOString()};localStorage.setItem(DRILL_KEY,JSON.stringify(drillRecords));const st=$("#drillStatus");if(st)st.innerHTML=`<span class="good">✓ ${drillHalfLabel()} 훈련결과 저장 완료</span> · 이 브라우저에 저장됨`}
 function printDrill(){const area=$("#drillPrintArea");if(!area)return;const w=window.open("","_blank","width=1000,height=800");if(!w){alert("인쇄창을 열 수 없습니다. 팝업 허용 여부를 확인하세요.");return}w.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>밀폐공간 대응훈련 시나리오</title><style>body{font-family:Arial,'Noto Sans KR',sans-serif;color:#111;margin:28px;line-height:1.55}button{display:none}.panel{border:0}.drill-summary,.drill-role-grid,.drill-equip,.drill-eval,.drill-record{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.box,.drill-role,.drill-equip>div,.drill-step,.drill-check{border:1px solid #aaa;padding:8px;border-radius:6px}.drill-step{display:grid;grid-template-columns:40px 1fr;gap:8px;margin:6px 0}.num{font-weight:bold}.section{margin-top:18px;border-top:1px solid #aaa;padding-top:10px}.drill-safety{border:2px solid #c00;padding:10px;margin:12px 0}.drill-case{border:2px solid #b66d00;padding:10px}.drill-record input,.drill-record textarea{border:1px solid #aaa;padding:5px;width:100%;box-sizing:border-box}details{display:block}details>ol{display:block}.desc,.note,.actor{font-size:11px}.drill-actions,.drill-status{display:none}@media print{body{margin:12mm}}
 /* ===== 2026-08 모바일 현장 UX 보정 ===== */
@@ -1914,7 +1926,7 @@ body.tbm-one-question.safe-stage-permit > .shell{background:#000!important}
 ${area.innerHTML}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print()},250)}
 if($("#drillLoadBtn"))$("#drillLoadBtn").onclick=chooseDrillFromInput;
 if($("#drillSpaceSearch"))$("#drillSpaceSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();chooseDrillFromInput()}});
-if($("#drillUseField"))$("#drillUseField").onclick=()=>{const id=fieldSelectedId||selectedId;if(!id){alert("현재 선택된 작업개소가 없습니다. 훈련 장소를 검색해주세요.");return}const s=spaces.find(x=>x.id===Number(id));if(s)setDrillSpace(s)};
+if($("#drillUseField"))$("#drillUseField").onclick=()=>{const id=fieldSelectedId||selectedId;if(!id){alert("현재 선택된 작업개소가 없습니다. 훈련 장소를 검색해주세요.");return}const s=spaces.find(x=>x.id===Number(id));if(s){setDrillSpace(s);const box=$("#drillScenario");if(box){box.classList.remove("drill-just-applied");void box.offsetWidth;box.classList.add("drill-just-applied");requestAnimationFrame(()=>box.scrollIntoView({behavior:"smooth",block:"start"}))}}};
 
 function refresh(){stats();renderFilters();renderAllList();renderOrgList();renderFieldOptions();renderDrillOptions();renderField();const near=$("#nearList"),detail=$("#detail"),detailAll=$("#detailAll");if(near)near.innerHTML='<div class="detail-empty">현재 위치를 먼저 확인해주세요.</div>';if(detail)detail.innerHTML='<div class="detail-empty">← 주변 목록 또는 전체 목록에서 밀폐공간을 선택하세요.</div>';if(detailAll)detailAll.innerHTML='<div class="detail-empty">← 목록에서 항목을 선택하세요.</div>'}
 function refreshCritical(){renderField();const near=$("#nearList"),detail=$("#detail"),detailAll=$("#detailAll");if(near)near.innerHTML='<div class="detail-empty">현재 위치를 먼저 확인해주세요.</div>';if(detail)detail.innerHTML='<div class="detail-empty">← 주변 목록 또는 전체 목록에서 밀폐공간을 선택하세요.</div>';if(detailAll)detailAll.innerHTML='<div class="detail-empty">← 목록에서 항목을 선택하세요.</div>'}
@@ -2136,7 +2148,6 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
     </div>
   </div>
 </div>
-<button class="tbm-permit-back" id="tbmPermitBack" type="button">← TBM으로</button>
 <div class="tbm-more-sheet" id="tbmMoreSheet" aria-hidden="true"><div class="tbm-more-card"><h3>기타 기능</h3><div class="tbm-more-grid">
   <button type="button" data-tbm-old-view="near">📍 가까운 작업개소<small>GPS 거리순 조회</small></button>
   <button type="button" data-tbm-old-view="all">🔎 전체 밀폐공간<small>역·시설·관리번호 검색</small></button>
@@ -2188,7 +2199,7 @@ if(location.hash&&location.hash.length>2){setTimeout(()=>{fillPermit({permitDate
 
 <style id="safeThreeStepStyles">
 /* ===== 3단계 순차형 모바일 홈: 중복 화면 제거 ===== */
-body.tbm-one-question.safe-3step-home{background:#f3f6f9!important;color:#111827!important;overflow-x:hidden}
+body.tbm-one-question.safe-3step-home:not(.tbm-old-open):not(.tbm-permit-open){background:#f3f6f9!important;color:#111827!important;overflow-x:hidden}
 body.tbm-one-question.safe-3step-home > .shell{display:block!important;width:min(100%,520px)!important;max-width:520px!important;min-height:100dvh!important;margin:0 auto!important;padding:0 12px 24px!important;background:#f3f6f9!important;box-shadow:none!important}
 body.tbm-one-question.safe-3step-home > .shell > *{display:none!important}
 body.tbm-one-question.safe-3step-home > .shell > .compact-header,
@@ -2333,7 +2344,7 @@ body.tbm-one-question.tbm-old-open.show-ai-brief #aiBriefCard{display:block!impo
   function openStage3(){if(!stage2Done){home();return}const s=selected();if(!s){stage1Done=false;stage2Done=false;home();return}try{permitSelectedId=s.id;selectedId=fieldSelectedId=s.id;if(typeof loadPermitForSpace==='function')loadPermitForSpace(s);body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two','safe-stage2-final');body.classList.add('tbm-permit-open','safe-stage-permit');if(typeof showView==='function')showView('permit');setTimeout(()=>window.ensurePermitMobileEnhancements?.(),0);window.scrollTo({top:0,behavior:'auto'})}catch(e){console.error(e);alert('작업허가서를 여는 중 오류가 발생했습니다. 다시 시도해주세요.')}}
   function completeStage1(){const sid=currentSpaceId();if(!sid){alert('작업개소를 먼저 선택해주세요.');return}if(stage1SpaceId!==null&&stage1SpaceId!==sid)stage2Done=false;stage1SpaceId=sid;stage1Done=true;updateHome();openStage2()}
   function completeStage2(){if(!stage1Done){home();return}const s=selected();if(!s){stage1Done=false;stage2Done=false;home();return}try{if(typeof getChecks==='function'&&typeof saveChecks==='function'){const c=getChecks(s);c.watch='yes';saveChecks(s,c)}}catch(e){console.warn('stage2 check save',e)}stage2Done=true;body.classList.remove('safe-stage2-final');updateHome();openStage3()}
-  function openOtherView(view){body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two','safe-stage2-final','safe-stage-permit','tbm-permit-open');body.classList.add('tbm-old-open');if(typeof showView==='function')showView(view);try{if(view==='near'&&typeof renderNear==='function')renderNear();if(view==='all'&&typeof renderAllList==='function')renderAllList();if(view==='org'&&typeof renderOrgList==='function')renderOrgList();if(view==='drill'&&typeof renderDrillOptions==='function')renderDrillOptions()}catch(e){console.warn('extra view init',view,e)}if(permitBack)permitBack.textContent='← 단계 목록';window.scrollTo({top:0,behavior:'auto'})}
+  function openOtherView(view){body.classList.remove('safe-3step-home','safe-stage-open','safe-stage-one','safe-stage-two','safe-stage2-final','safe-stage-permit','tbm-permit-open');body.classList.add('tbm-old-open');if(typeof showView==='function')showView(view);try{if(view==='near'&&typeof renderNear==='function')renderNear();if(view==='all'&&typeof renderAllList==='function')renderAllList();if(view==='org'&&typeof renderOrgList==='function')renderOrgList();if(view==='drill'&&typeof renderDrillOptions==='function'){renderDrillOptions();setTimeout(()=>{const box=document.getElementById('drillScenario');const hasSpace=typeof drillSpace==='function'&&drillSpace();if(box&&hasSpace)box.scrollIntoView({behavior:'smooth',block:'start'})},150)}}catch(e){console.warn('extra view init',view,e)}if(permitBack)permitBack.textContent='← 단계 목록';window.scrollTo({top:0,behavior:'auto'})}
   btn1.onclick=openStage1;btn2.onclick=openStage2;btn3.onclick=openStage3;stageBack.onclick=home;
   $('#tbmStage1CompleteBtn')?.addEventListener('click',completeStage1);
   if(stage2Complete)stage2Complete.addEventListener('click',completeStage2);
@@ -2764,7 +2775,6 @@ function stopAliveVoiceListen(){
 function renderAliveCard(s){
   const card=$("#step2AliveCard");
   const floatBtn=$("#aliveFloatToggle"),floatDot=$("#aliveFloatDot");
-  if(floatBtn)floatBtn.classList.toggle("hide",!s);
   if(floatDot)floatDot.className="alive-float-dot"+(aliveState.active?(aliveState.escalated?" escalate":" on"):"");
   if(!card)return;
   $$("#aliveIntervalGroup button").forEach(b=>b.classList.toggle("on",Number(b.dataset.aliveInterval)===aliveState.intervalMin));
@@ -3022,9 +3032,41 @@ document.addEventListener("DOMContentLoaded",()=>{
 })();
 </script>
 <style>
-/* 작업허가서 뒤로가기 알약버튼과 콘텐츠 겹침 방지 (모든 진입 경로 대응, ID 우선순위로 항상 적용) */
+/* 뒤로가기 버튼을 더 이상 화면에 떠 있는 방식으로 쓰지 않고, 허가서 맨 위 콘텐츠의 일부로 고정 배치 (겹침 원천 차단) */
+body.tbm-one-question .tbm-permit-back{
+  display:flex!important;
+  position:static!important;
+  inset:auto!important;
+  top:auto!important;left:auto!important;right:auto!important;
+  width:auto!important;flex:0 0 auto!important;box-sizing:border-box!important;
+  align-items:center;justify-content:flex-start;gap:8px;
+  min-height:44px!important;height:auto!important;
+  margin:0!important;padding:10px 14px!important;
+  border-radius:12px!important;border:1px solid #2c3746!important;
+  background:#111722!important;color:#fff!important;
+  font-size:13px!important;font-weight:900!important;line-height:1.2!important;
+  box-shadow:none!important;z-index:auto!important;
+  white-space:nowrap!important;
+}
+body.tbm-one-question:not(.tbm-permit-open):not(.tbm-old-open) .tbm-permit-back{display:none!important}
+.permit-top-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.permit-top-actions{display:flex;align-items:center;gap:7px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+.permit-top-actions .btn{min-height:44px;padding:9px 13px;border-radius:12px;font-size:13px;white-space:nowrap}
+@media(max-width:520px){
+  .permit-top-bar{flex-direction:column;align-items:stretch}
+  .permit-top-bar .tbm-permit-back{width:100%!important;justify-content:center}
+  .permit-top-actions{width:100%;justify-content:stretch}
+  .permit-top-actions .btn{flex:1;padding:9px 6px;font-size:12px}
+}
+/* 더 이상 필요 없는 스크롤-겹침 방지용 상단 여백/붙임 해제 규칙 (버튼이 정적 배치되어 항상 안전) */
 body.tbm-permit-open:not(.safe-stage-permit) #view-permit,
-body.tbm-old-open #view-permit{padding-top:max(60px,calc(52px + env(safe-area-inset-top)))!important;box-sizing:border-box!important}
+body.tbm-old-open #view-permit{padding-top:0!important}
+body.tbm-permit-open:not(.safe-stage-permit) #view-permit .permit-actions,
+body.tbm-old-open #view-permit .permit-actions{position:static!important;top:auto!important}
+#view-permit{padding-top:0!important}
+/* 상단 검색창(작업장소가 적힌 검정 박스)은 1단계에서 이미 장소를 선택했으므로 제거 */
+#permitSpaceSearch,#permitLoadBtn{display:none!important}
+.permit-actions{margin:0!important;padding:0!important;min-height:0!important}
 </style>
 </body>
 </html>
