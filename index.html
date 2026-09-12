@@ -1786,127 +1786,7 @@ body.tbm-one-question.safe-stage-permit > .shell{background:#000!important}
 }
 </style>
 </head><body>
-${area.innerHTML}
-<style id="permitNoOverlapFinal20260910">
-@media (max-width:760px){
-  body.safe-stage-permit{overflow-x:hidden!important;background:#000!important}
-  body.safe-stage-permit #view-permit{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:56px 8px 24px!important;overflow-x:hidden!important;background:#000!important;box-sizing:border-box!important}
-  body.safe-stage-permit .tbm-permit-back{position:fixed!important;top:max(8px,env(safe-area-inset-top))!important;left:8px!important;z-index:10000!important;min-height:40px!important;margin:0!important}
-
-  /* 상단 작업개소 + 저장 : 반드시 한 줄 */
-  #view-permit .permit-actions{display:grid!important;grid-template-columns:minmax(0,1fr) 74px!important;grid-template-rows:44px!important;gap:7px!important;position:static!important;inset:auto!important;width:100%!important;max-width:100%!important;height:44px!important;min-height:44px!important;margin:0 0 10px!important;padding:0!important;background:transparent!important;overflow:hidden!important;z-index:auto!important}
-  #view-permit .permit-actions #permitSpaceSearch{display:block!important;grid-column:1!important;grid-row:1!important;width:100%!important;max-width:100%!important;min-width:0!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 11px!important;box-sizing:border-box!important;border-radius:11px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-  #view-permit .permit-actions #permitSaveBtn{display:block!important;grid-column:2!important;grid-row:1!important;width:74px!important;min-width:74px!important;max-width:74px!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 5px!important;box-sizing:border-box!important;border-radius:11px!important;font-size:12px!important}
-  #view-permit .permit-actions #permitLoadBtn,#view-permit .permit-actions #permitPrintBtn,#view-permit .permit-actions #permitNewBtn{display:none!important}
-
-  /* 구형 5단계 탭은 모바일에서 완전 제거. 진행 상태는 카드 안 1/5만 사용 */
-  #view-permit .permit-wizard-nav{display:none!important;visibility:hidden!important;position:absolute!important;left:-99999px!important;top:auto!important;width:0!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;pointer-events:none!important}
-  #view-permit .permit-wizard-tab{display:none!important}
-  #view-permit .permit-title,#view-permit .permit-step-head{display:none!important}
-
-  /* 카드 컨테이너는 세로 일반 흐름. 한 장만 노출 */
-  #view-permit .permit-form,#view-permit .permit-wizard-track{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important;transform:none!important;scroll-snap-type:none!important;transition:none!important}
-  #view-permit .permit-wizard-slide{display:none!important;position:relative!important;inset:auto!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;margin:0!important;padding:14px 12px 14px!important;box-sizing:border-box!important;overflow:visible!important;background:#f7f9fb!important;color:#111!important;border-radius:16px!important;transform:none!important}
-  #view-permit .permit-wizard-slide.mobile-active{display:block!important}
-  #view-permit .permit-step-progress{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;margin:0 0 12px!important;padding:10px 11px!important}
-  #view-permit .permit-step-progress b{font-size:14px!important;white-space:nowrap!important}
-  #view-permit .permit-step-progress span{font-size:12px!important;text-align:right!important}
-
-  /* 이전/다음은 active 카드의 맨 아래 일반 흐름으로만 존재 */
-  #view-permit .permit-wizard-controls{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;position:static!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;float:none!important;clear:both!important;width:100%!important;max-width:100%!important;height:auto!important;margin:14px 0 0!important;padding:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;z-index:1!important}
-  #view-permit .permit-wizard-controls button{position:static!important;inset:auto!important;transform:none!important;float:none!important;width:100%!important;max-width:100%!important;min-width:0!important;min-height:54px!important;margin:0!important;padding:10px 8px!important;border-radius:13px!important;font-size:15px!important;box-sizing:border-box!important}
-
-  /* 입력요소는 절대로 카드 폭 밖으로 나가지 않음 */
-  #view-permit .permit-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;width:100%!important;max-width:100%!important}
-  #view-permit .permit-grid .span2,#view-permit .permit-grid .span4{grid-column:1!important}
-  #view-permit .permit-field,#view-permit .permit-field>*{min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
-  #view-permit .permit-field input,#view-permit .permit-field select,#view-permit .permit-field textarea{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;box-sizing:border-box!important}
-  #view-permit .permit-table-wrap{width:100%!important;max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important}
-  #view-permit .gas-permit-box,#view-permit .worker-lines,#view-permit .permit-bottom,#view-permit .approval-workflow,#view-permit .final-check{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}
-
-  /* 예전 하단바/고정버튼은 허가서에서 무조건 숨김 */
-  body.safe-stage-permit .tbm-actions,
-  body.safe-stage-permit #bottomNav,
-  body.safe-stage-permit .bottom-nav,
-  body.safe-stage-permit .mobile-bottom-nav,
-  body.safe-stage-permit .mobile-primary{display:none!important}
-}
-</style>
-<script id="permitNoOverlapFinalJS20260910">
-(function(){
-  function qa(s,r=document){return Array.from(r.querySelectorAll(s))}
-  function mobile(){return window.matchMedia && window.matchMedia('(max-width:760px)').matches}
-  function getIndex(){
-    const tabs=qa('.permit-wizard-tab');
-    const i=tabs.findIndex(t=>t.classList.contains('active'));
-    if(i>=0)return i;
-    const slides=qa('#permitWizardTrack .permit-wizard-slide');
-    const j=slides.findIndex(s=>s.classList.contains('mobile-active'));
-    return j>=0?j:0;
-  }
-  function normalize(index){
-    if(!mobile() || !document.body.classList.contains('safe-stage-permit'))return;
-    const track=document.getElementById('permitWizardTrack');
-    const controls=document.querySelector('#view-permit .permit-wizard-controls');
-    if(!track)return;
-    const slides=qa('.permit-wizard-slide',track);
-    if(!slides.length)return;
-    let i=Number(index);if(!Number.isFinite(i))i=getIndex();i=Math.max(0,Math.min(i,slides.length-1));
-    slides.forEach((s,n)=>{
-      s.classList.toggle('mobile-active',n===i);
-      s.style.setProperty('display',n===i?'block':'none','important');
-    });
-    const nav=document.querySelector('#view-permit .permit-wizard-nav');
-    if(nav){nav.style.setProperty('display','none','important');nav.setAttribute('aria-hidden','true')}
-    track.style.setProperty('height','auto','important');
-    track.style.setProperty('overflow','visible','important');
-    track.scrollLeft=0;
-    if(controls){
-      const active=slides[i];
-      if(controls.parentElement!==active)active.appendChild(controls);
-      ['position','left','right','top','bottom','transform','float'].forEach(p=>controls.style.removeProperty(p));
-      controls.style.setProperty('position','static','important');
-      controls.style.setProperty('display','grid','important');
-      controls.style.setProperty('width','100%','important');
-      controls.style.setProperty('margin','14px 0 0','important');
-    }
-    const actions=document.querySelector('#view-permit .permit-actions');
-    if(actions){
-      actions.style.setProperty('display','grid','important');
-      actions.style.setProperty('grid-template-columns','minmax(0,1fr) 74px','important');
-      actions.style.setProperty('grid-template-rows','44px','important');
-      actions.style.setProperty('height','44px','important');
-      actions.style.setProperty('position','static','important');
-    }
-    const search=document.getElementById('permitSpaceSearch');
-    if(search){search.readOnly=true;search.style.setProperty('grid-column','1','important');search.style.setProperty('width','100%','important')}
-    const save=document.getElementById('permitSaveBtn');
-    if(save){save.style.setProperty('grid-column','2','important');save.style.setProperty('width','74px','important')}
-  }
-  function patchGo(){
-    const fn=window.goPermitWizardStep;
-    if(!fn||fn.__noOverlapFinal)return;
-    const wrapped=function(){
-      const out=fn.apply(this,arguments);
-      const idx=getIndex();
-      requestAnimationFrame(()=>normalize(idx));
-      setTimeout(()=>normalize(getIndex()),80);
-      return out;
-    };
-    wrapped.__noOverlapFinal=true;
-    window.goPermitWizardStep=wrapped;
-  }
-  function init(){patchGo();normalize(getIndex())}
-  const mo=new MutationObserver(()=>{if(document.body.classList.contains('safe-stage-permit'))setTimeout(init,0)});
-  mo.observe(document.body,{attributes:true,attributeFilter:['class']});
-  document.addEventListener('click',e=>{if(e.target.closest && e.target.closest('#view-permit'))setTimeout(()=>normalize(getIndex()),0)},true);
-  window.addEventListener('resize',()=>setTimeout(()=>normalize(getIndex()),50),{passive:true});
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,300));else setTimeout(init,300);
-  setTimeout(init,1000);
-})();
-</script>
-
-</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print()},250)}
+${area.innerHTML}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print()},250)}
 if($("#drillLoadBtn"))$("#drillLoadBtn").onclick=chooseDrillFromInput;
 if($("#drillSpaceSearch"))$("#drillSpaceSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();chooseDrillFromInput()}});
 if($("#drillUseField"))$("#drillUseField").onclick=()=>{const id=fieldSelectedId||selectedId;if(!id){alert("현재 선택된 작업개소가 없습니다. 훈련 장소를 검색해주세요.");return}const s=spaces.find(x=>x.id===Number(id));if(s)setDrillSpace(s)};
@@ -2409,6 +2289,7 @@ body.tbm-one-question.tbm-old-open.show-ai-brief #aiBriefCard{display:block!impo
 })();
 </script>
 
+
 <style id="permitNoOverlapFinal20260910">
 @media (max-width:760px){
   body.safe-stage-permit{overflow-x:hidden!important;background:#000!important}
@@ -2527,6 +2408,5 @@ body.tbm-one-question.tbm-old-open.show-ai-brief #aiBriefCard{display:block!impo
   setTimeout(init,1000);
 })();
 </script>
-
 </body>
 </html>
