@@ -2408,5 +2408,54 @@ body.tbm-one-question.tbm-old-open.show-ai-brief #aiBriefCard{display:block!impo
   setTimeout(init,1000);
 })();
 </script>
+
+<style id="permitFixedTopBarFix20260912">
+/* ===== 작업허가서 상단 작업바 고정 보정 ===== */
+body.safe-stage-permit #view-permit{
+  padding-top:126px!important;
+}
+body.safe-stage-permit #view-permit .permit-actions{
+  position:fixed!important;
+  top:58px!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  width:min(calc(100vw - 16px),1480px)!important;
+  max-width:1480px!important;
+  z-index:9998!important;
+  margin:0!important;
+  padding:8px!important;
+  box-sizing:border-box!important;
+  background:rgba(12,17,25,.98)!important;
+  border:1px solid #2a3545!important;
+  border-radius:12px!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.28)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+}
+body.safe-stage-permit .tbm-permit-back{
+  position:fixed!important;
+  top:8px!important;
+  left:max(8px,calc((100vw - 1480px)/2 + 8px))!important;
+  z-index:10000!important;
+}
+@media(max-width:760px){
+  body.safe-stage-permit #view-permit{padding-top:118px!important;}
+  body.safe-stage-permit #view-permit .permit-actions{
+    top:56px!important;
+    width:calc(100vw - 16px)!important;
+    padding:6px!important;
+    grid-template-columns:minmax(0,1fr) 68px!important;
+    gap:7px!important;
+  }
+  body.safe-stage-permit .tbm-permit-back{
+    top:max(8px,env(safe-area-inset-top))!important;
+    left:8px!important;
+  }
+}
+@media print{
+  body.safe-stage-permit #view-permit{padding-top:0!important;}
+  body.safe-stage-permit #view-permit .permit-actions{display:none!important;}
+}
+</style>
 </body>
 </html>
